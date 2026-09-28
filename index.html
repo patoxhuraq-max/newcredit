@@ -107,49 +107,49 @@
     <!-- HIDDEN FILE INPUT FOR PROFILE UPLOAD -->
     <input type="file" id="profileFileInput" accept="image/*" class="hidden" onchange="handleProfileUpload(event)">
 
-    <!-- MAIN WRAPPER CARD (INNER TALL WHITE CONTAINER MATCHING IMAGE 3) -->
-    <div class="w-full max-w-[540px] bg-white/80 backdrop-blur-md border border-[#D5EEE6] rounded-[38px] p-4 sm:p-6 soft-mint-shadow relative my-auto">
+    <!-- MAIN CONTAINER (จำกัดขนาดกลางหน้าจอโดยตรง) -->
+    <div class="w-full max-w-[540px] relative my-auto">
 
         <!-- ============================================================ -->
         <!-- PAGE 01 — LOADING / ENTRY PAGE                               -->
         <!-- ============================================================ -->
         <div id="page01" class="page-view w-full flex flex-col items-center relative">
             
-            <!-- PROFILE CIRCLE -->
+            <!-- PROFILE CIRCLE (วางเกยอยู่ด้านบนของกล่อง) -->
             <div class="relative z-20 -mb-10 group cursor-pointer" onclick="triggerProfileUpload()" title="คลิกเพื่อเปลี่ยนรูปโปรไฟล์">
-                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 bg-white border-2 border-[#D5EEE6] soft-mint-shadow relative flex items-center justify-center overflow-hidden">
+                <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full p-1 bg-white border-2 border-[#D5EEE6] soft-mint-shadow relative flex items-center justify-center overflow-hidden">
                     <img id="profileImgP1" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" alt="Profile" class="w-full h-full object-cover rounded-full">
                     
                     <div class="absolute inset-0 bg-[#263A36]/40 rounded-full flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <i class="fa-solid fa-camera text-white text-lg"></i>
-                        <span class="text-white text-[10px] mt-1 font-light">เปลี่ยนรูป</span>
+                        <i class="fa-solid fa-camera text-white text-xs"></i>
+                        <span class="text-white text-[9px] mt-0.5 font-light">เปลี่ยนรูป</span>
                     </div>
                 </div>
                 <div class="absolute inset-0 -m-1 rounded-full border border-[#43B79B]/30 pulse-ring pointer-events-none"></div>
             </div>
 
-            <!-- MAIN LOADING PANEL -->
-            <div class="w-full bg-white border border-[#D5EEE6] rounded-[32px] pt-14 p-4 sm:p-6 soft-mint-shadow relative">
+            <!-- MAIN LOADING PANEL CONTAINER -->
+            <div class="w-full bg-white border border-[#D5EEE6] rounded-[32px] pt-12 p-4 sm:p-6 soft-mint-shadow relative">
                 
-                <!-- MINT CONTENT BOX -->
-                <div class="bg-[#EEFAF5] border border-[#D5EEE6] rounded-[24px] p-4 sm:p-5 text-center mb-5">
+                <!-- MINT CONTENT BOX (กล่องเขียวมินต์ใหญ่) -->
+                <div class="bg-[#EAF6F2] border border-[#D5EEE6] rounded-[28px] p-4 sm:p-6 text-center mb-5">
                     
-                    <!-- DESCRIPTION BOX -->
-                    <div class="bg-white rounded-[20px] border border-[#D5EEE6] shadow-sm p-4 mb-4">
-                        <h2 id="loadingText" class="text-[#263A36] text-sm sm:text-base font-semibold leading-relaxed">
+                    <!-- DESCRIPTION BOX (กล่องข้อความขาว) -->
+                    <div class="bg-white rounded-[22px] border border-[#D5EEE6] shadow-sm p-6 sm:p-8 mb-4">
+                        <h2 id="loadingText" class="text-[#263A36] text-base sm:text-lg font-bold leading-relaxed">
                             กำลังเตรียมเว็บไซต์<br>กรุณารอสักครู่...
                         </h2>
                     </div>
 
                     <!-- LOADING STATUS TEXT -->
-                    <p id="loadingStatusText" class="text-[#43B79B] font-medium text-xs mb-4 flex items-center justify-center gap-2">
+                    <p id="loadingStatusText" class="text-[#55BBA1] font-semibold text-xs sm:text-sm mb-4 flex items-center justify-center gap-2">
                         <i class="fa-solid fa-circle-notch fa-spin"></i>
                         <span>พร้อมเข้าสู่เว็บไซต์!</span>
                     </p>
 
-                    <!-- ON / OFF TOGGLE -->
+                    <!-- ON / OFF TOGGLE BUTTON -->
                     <div class="inline-flex bg-white rounded-full p-1 border border-[#D5EEE6] shadow-inner w-52 sm:w-60 h-11 items-center relative">
-                        <button id="toggleOn" onclick="setToggleStatus(true)" class="flex-1 h-full rounded-full font-semibold text-xs transition-all duration-300 bg-[#43B79B] text-white shadow-md">
+                        <button id="toggleOn" onclick="setToggleStatus(true)" class="flex-1 h-full rounded-full font-semibold text-xs transition-all duration-300 bg-[#55BBA1] text-white shadow-sm">
                             On
                         </button>
                         <button id="toggleOff" onclick="setToggleStatus(false)" class="flex-1 h-full rounded-full font-semibold text-xs transition-all duration-300 text-[#78938C]">
@@ -159,27 +159,27 @@
 
                 </div>
 
-                <!-- BOTTOM PREVIEW SECTION -->
-                <div class="flex flex-col gap-4 items-center">
+                <!-- BOTTOM SECTION (จัดสรรเป็น 2 คอลัมน์ ซ้าย-รูปพรีวิว / ขวา-ปุ่มเข้าเว็บ) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 items-center">
                     
                     <!-- PREVIEW IMAGE -->
-                    <div class="w-full aspect-video rounded-[18px] border border-[#D5EEE6] bg-[#F7FFFC] overflow-hidden relative soft-mint-shadow">
+                    <div class="w-full h-36 sm:h-40 rounded-[20px] border border-[#D5EEE6] bg-[#F7FFFC] overflow-hidden relative soft-mint-shadow">
                         <img id="previewImage" src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800" alt="Preview" class="w-full h-full object-cover">
                         
-                        <div id="previewCaption" class="absolute bottom-2 left-2 bg-[#263A36]/75 backdrop-blur-sm text-white text-[10px] px-2.5 py-1 rounded-full border border-white/20">
+                        <div id="previewCaption" class="absolute bottom-2 left-2 bg-black/60 backdrop-blur-sm text-white text-[9px] sm:text-[10px] px-2.5 py-1 rounded-full border border-white/20">
                             1 / 3: ร้านบรรยากาศอบอุ่น สไตล์ Minimal Mint
                         </div>
                     </div>
 
-                    <!-- BUTTONS -->
-                    <div class="w-full flex flex-col gap-2">
-                        <button onclick="goToPage('page02')" class="w-full h-[48px] bg-[#43B79B] hover:bg-[#39A188] active:scale-[0.98] text-white font-semibold text-xs sm:text-sm rounded-full btn-mint-shadow flex items-center justify-center gap-2 transition-all">
+                    <!-- BUTTONS CONTAINER -->
+                    <div class="w-full flex flex-col gap-2.5">
+                        <button onclick="goToPage('page02')" class="w-full h-[46px] bg-[#55BBA1] hover:bg-[#43A68D] active:scale-[0.98] text-white font-semibold text-xs sm:text-sm rounded-full btn-mint-shadow flex items-center justify-center gap-2 transition-all">
                             <span>เข้าสู่เว็บไซต์</span>
-                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
                         </button>
 
-                        <button onclick="exitWebsite()" class="w-full h-[48px] bg-white border border-[#D5EEE6] hover:bg-[#E8F8F2] text-[#405A53] hover:text-[#267A69] active:scale-[0.98] font-semibold text-xs sm:text-sm rounded-full flex items-center justify-center gap-2 transition-all">
-                            <i class="fa-solid fa-arrow-left text-[10px]"></i>
+                        <button onclick="exitWebsite()" class="w-full h-[46px] bg-white border border-[#D5EEE6] hover:bg-[#E8F8F2] text-[#263A36] active:scale-[0.98] font-semibold text-xs sm:text-sm rounded-full flex items-center justify-center gap-2 transition-all">
+                            <i class="fa-solid fa-arrow-left text-xs"></i>
                             <span>ออกจากเว็บไซต์</span>
                         </button>
                     </div>
@@ -199,8 +199,8 @@
             <!-- MAIN PROFILE CONTAINER CARD -->
             <div class="w-full bg-white border border-[#D5EEE6] rounded-[28px] soft-mint-shadow p-3.5 sm:p-5 text-center relative mb-5 overflow-hidden">
                 
-                <!-- COVER BANNER -->
-                <div class="w-full h-32 sm:h-40 rounded-[20px] overflow-hidden relative border border-[#D5EEE6] bg-[#DFF5ED]">
+                <!-- COVER BANNER (ขนาดสัดส่วน 1080x580) -->
+                <div class="w-full aspect-[1080/580] rounded-[20px] overflow-hidden relative border border-[#D5EEE6] bg-[#DFF5ED]">
                     <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800" alt="Cover" class="w-full h-full object-cover">
                 </div>
 
@@ -289,81 +289,79 @@
 
 
             <!-- REVIEW FORM CARD -->
-            <div class="w-full bg-[#EEFAF5] border border-[#D5EEE6] rounded-[28px] p-3 soft-mint-shadow mb-4">
-                <div class="w-full bg-white border border-[#D5EEE6] rounded-[22px] p-4">
-                    
-                    <!-- TOP SECTION -->
-                    <div class="flex items-start justify-between gap-2 mb-4">
-                        <div class="bg-[#F7FFFC] border border-[#D5EEE6] rounded-[16px] p-2 text-center min-w-[80px] shadow-sm">
-                            <p class="text-[#78938C] text-[9px] font-semibold uppercase tracking-wider mb-0.5">
-                                <i class="fa-regular fa-calendar-check text-[#43B79B] mr-0.5"></i>Date
-                            </p>
-                            <div class="bg-[#43B79B] text-white font-bold rounded-full py-0.5 text-xs my-0.5 shadow-sm">
-                                <span id="currentDateDayDisplay">28</span>
-                            </div>
-                            <p id="currentDateMonthYearDisplay" class="text-[#267A69] text-[9px] font-medium">
-                                ก.ย. 2026
-                            </p>
+            <div class="w-full bg-white border border-[#D5EEE6] rounded-[28px] p-4 sm:p-5 soft-mint-shadow mb-4">
+                
+                <!-- TOP SECTION -->
+                <div class="flex items-start justify-between gap-2 mb-4">
+                    <div class="bg-[#F7FFFC] border border-[#D5EEE6] rounded-[16px] p-2 text-center min-w-[80px] shadow-sm">
+                        <p class="text-[#78938C] text-[9px] font-semibold uppercase tracking-wider mb-0.5">
+                            <i class="fa-regular fa-calendar-check text-[#43B79B] mr-0.5"></i>Date
+                        </p>
+                        <div class="bg-[#43B79B] text-white font-bold rounded-full py-0.5 text-xs my-0.5 shadow-sm">
+                            <span id="currentDateDayDisplay">28</span>
                         </div>
-
-                        <div class="text-right flex flex-col items-end pt-0.5">
-                            <span class="inline-block bg-[#DFF5ED] text-[#267A69] text-[10px] font-bold px-2 py-0.5 rounded-full border border-[#C8E9DF] mb-1">
-                                Review Form ✍️
-                            </span>
-                            <h3 class="text-[#43B79B] font-bold text-xs leading-tight">
-                                plus one for me
-                            </h3>
-                            <p class="text-[#78938C] text-[10px] font-light mt-0.5">
-                                thank you nakab
-                            </p>
-                        </div>
+                        <p id="currentDateMonthYearDisplay" class="text-[#267A69] text-[9px] font-medium">
+                            ก.ย. 2026
+                        </p>
                     </div>
 
-                    <!-- INPUT SECTION -->
-                    <div class="mb-3.5">
-                        <label class="block text-[#263A36] font-semibold text-xs mb-1">
-                            ใส่ชื่อลูกค้า :
-                        </label>
-                        <div class="flex items-center gap-2">
-                            <div class="flex-grow bg-[#F7FFFC] border border-[#D5EEE6] rounded-full px-3 py-2 focus-within:border-[#43B79B] transition-all shadow-inner">
-                                <input type="text" id="inputCustomerName" placeholder="กรุณาใส่ชื่อของคุณ..." class="w-full bg-transparent text-[#263A36] text-xs outline-none">
-                            </div>
-                            
-                            <button onclick="submitReview()" class="h-[38px] px-3.5 bg-[#43B79B] hover:bg-[#39A188] active:scale-[0.96] text-white font-semibold rounded-full btn-mint-shadow text-xs flex items-center justify-center gap-1 flex-shrink-0 transition-all">
-                                <i class="fa-solid fa-paper-plane text-[10px]"></i>
-                                <span>บันทึก</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- CUSTOMER REVIEW TEXTAREA BOX -->
-                    <div class="mb-3.5">
-                        <label class="block text-[#263A36] font-semibold text-xs mb-1">
-                            รีวิวจากลูกค้า :
-                        </label>
-                        <div class="bg-[#F7FFFC] border border-[#D5EEE6] rounded-[16px] p-2.5 focus-within:border-[#43B79B] transition-all shadow-inner">
-                            <textarea id="inputCustomerReview" rows="3" placeholder="พิมพ์รีวิวและความประทับใจของคุณที่นี่..." class="w-full bg-transparent text-[#263A36] text-xs outline-none resize-none leading-relaxed"></textarea>
-                        </div>
-                    </div>
-
-                    <!-- CIRCLE STAR RATING CONTAINER -->
-                    <div class="bg-[#F7FFFC] border border-[#D5EEE6] rounded-full p-2 px-3 flex items-center justify-between flex-wrap gap-1.5">
-                        <span class="text-[#263A36] font-semibold text-[11px] flex items-center gap-1">
-                            <i class="fa-solid fa-star text-[#43B79B]"></i>
-                            ให้คะแนน :
+                    <div class="text-right flex flex-col items-end pt-0.5">
+                        <span class="inline-block bg-[#DFF5ED] text-[#267A69] text-[10px] font-bold px-2 py-0.5 rounded-full border border-[#C8E9DF] mb-1">
+                            Review Form ✍️
                         </span>
-                        
-                        <div class="flex items-center gap-1" id="starRatingContainer">
-                            <div class="star-circle active" onclick="setRating(1)"><i class="fa-solid fa-star text-[9px]"></i></div>
-                            <div class="star-circle active" onclick="setRating(2)"><i class="fa-solid fa-star text-[9px]"></i></div>
-                            <div class="star-circle active" onclick="setRating(3)"><i class="fa-solid fa-star text-[9px]"></i></div>
-                            <div class="star-circle active" onclick="setRating(4)"><i class="fa-solid fa-star text-[9px]"></i></div>
-                            <div class="star-circle active" onclick="setRating(5)"><i class="fa-solid fa-star text-[9px]"></i></div>
-                            <span id="ratingScoreText" class="text-[10px] font-bold text-[#267A69] ml-0.5">(5/5)</span>
-                        </div>
+                        <h3 class="text-[#43B79B] font-bold text-xs leading-tight">
+                            plus one for me
+                        </h3>
+                        <p class="text-[#78938C] text-[10px] font-light mt-0.5">
+                            thank you nakab
+                        </p>
                     </div>
-
                 </div>
+
+                <!-- INPUT SECTION -->
+                <div class="mb-3.5">
+                    <label class="block text-[#263A36] font-semibold text-xs mb-1">
+                        ใส่ชื่อลูกค้า :
+                    </label>
+                    <div class="flex items-center gap-2">
+                        <div class="flex-grow bg-[#F7FFFC] border border-[#D5EEE6] rounded-full px-3 py-2 focus-within:border-[#43B79B] transition-all shadow-inner">
+                            <input type="text" id="inputCustomerName" placeholder="กรุณาใส่ชื่อของคุณ..." class="w-full bg-transparent text-[#263A36] text-xs outline-none">
+                        </div>
+                        
+                        <button onclick="submitReview()" class="h-[38px] px-3.5 bg-[#43B79B] hover:bg-[#39A188] active:scale-[0.96] text-white font-semibold rounded-full btn-mint-shadow text-xs flex items-center justify-center gap-1 flex-shrink-0 transition-all">
+                            <i class="fa-solid fa-paper-plane text-[10px]"></i>
+                            <span>บันทึก</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CUSTOMER REVIEW TEXTAREA BOX -->
+                <div class="mb-3.5">
+                    <label class="block text-[#263A36] font-semibold text-xs mb-1">
+                        รีวิวจากลูกค้า :
+                    </label>
+                    <div class="bg-[#F7FFFC] border border-[#D5EEE6] rounded-[16px] p-2.5 focus-within:border-[#43B79B] transition-all shadow-inner">
+                        <textarea id="inputCustomerReview" rows="3" placeholder="พิมพ์รีวิวและความประทับใจของคุณที่นี่..." class="w-full bg-transparent text-[#263A36] text-xs outline-none resize-none leading-relaxed"></textarea>
+                    </div>
+                </div>
+
+                <!-- CIRCLE STAR RATING CONTAINER -->
+                <div class="bg-[#F7FFFC] border border-[#D5EEE6] rounded-full p-2 px-3 flex items-center justify-between flex-wrap gap-1.5">
+                    <span class="text-[#263A36] font-semibold text-[11px] flex items-center gap-1">
+                        <i class="fa-solid fa-star text-[#43B79B]"></i>
+                        ให้คะแนน :
+                    </span>
+                    
+                    <div class="flex items-center gap-1" id="starRatingContainer">
+                        <div class="star-circle active" onclick="setRating(1)"><i class="fa-solid fa-star text-[9px]"></i></div>
+                        <div class="star-circle active" onclick="setRating(2)"><i class="fa-solid fa-star text-[9px]"></i></div>
+                        <div class="star-circle active" onclick="setRating(3)"><i class="fa-solid fa-star text-[9px]"></i></div>
+                        <div class="star-circle active" onclick="setRating(4)"><i class="fa-solid fa-star text-[9px]"></i></div>
+                        <div class="star-circle active" onclick="setRating(5)"><i class="fa-solid fa-star text-[9px]"></i></div>
+                        <span id="ratingScoreText" class="text-[10px] font-bold text-[#267A69] ml-0.5">(5/5)</span>
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -510,7 +508,7 @@
         let currentRating = 5;
         let isToggleOn = true;
         let currentReviewPage = 1;
-        const reviewsPerPage = 4;
+        const reviewsPerPage = 15;
 
         // DYNAMIC STORE RULES
         let shopRules = [
@@ -602,7 +600,8 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const newImgUrl = e.target.result;
-                    document.getElementById('profileImgP1').src = newImgUrl;
+                    const p1Img = document.getElementById('profileImgP1');
+                    if (p1Img) p1Img.src = newImgUrl;
                     document.getElementById('profileImgP2').src = newImgUrl;
                 };
                 reader.readAsDataURL(file);
@@ -617,11 +616,11 @@
             const loadingText = document.getElementById('loadingText');
 
             if (isOn) {
-                btnOn.className = "flex-1 h-full rounded-full font-semibold text-xs transition-all duration-300 bg-[#43B79B] text-white shadow-md";
+                btnOn.className = "flex-1 h-full rounded-full font-semibold text-xs transition-all duration-300 bg-[#55BBA1] text-white shadow-sm";
                 btnOff.className = "flex-1 h-full rounded-full font-semibold text-xs transition-all duration-300 text-[#78938C]";
                 loadingText.innerHTML = "กำลังเตรียมเว็บไซต์<br>กรุณารอสักครู่...";
             } else {
-                btnOff.className = "flex-1 h-full rounded-full font-semibold text-xs transition-all duration-300 bg-[#78938C] text-white shadow-md";
+                btnOff.className = "flex-1 h-full rounded-full font-semibold text-xs transition-all duration-300 bg-[#78938C] text-white shadow-sm";
                 btnOn.className = "flex-1 h-full rounded-full font-semibold text-xs transition-all duration-300 text-[#78938C]";
                 loadingText.innerHTML = "ระบบหยุดพักชั่วคราว<br>เลื่อนปุ่มเปิดเพื่อดำเนินการต่อ";
             }
