@@ -108,7 +108,7 @@
     <!-- HIDDEN FILE INPUT FOR PROFILE UPLOAD -->
     <input type="file" id="profileFileInput" accept="image/*" class="hidden" onchange="handleProfileUpload(event)">
 
-    <!-- MAIN CONTAINER (จำกัดขนาดกลางหน้าจอ ตอบสนองกับจอมือถืออย่างเต็มประสิทธิภาพ) -->
+    <!-- MAIN CONTAINER -->
     <div class="w-full max-w-[540px] relative my-auto">
 
         <!-- ============================================================ -->
@@ -116,7 +116,7 @@
         <!-- ============================================================ -->
         <div id="page01" class="page-view w-full flex flex-col items-center relative">
             
-            <!-- PROFILE CIRCLE (วางเกยอยู่ด้านบนของกล่อง) -->
+            <!-- PROFILE CIRCLE -->
             <div class="relative z-20 -mb-8 sm:-mb-10 group cursor-pointer" onclick="triggerProfileUpload()" title="คลิกเพื่อเปลี่ยนรูปโปรไฟล์">
                 <div class="w-18 h-18 sm:w-24 sm:h-24 rounded-full p-1 bg-white border-2 border-[#D5EEE6] soft-mint-shadow relative flex items-center justify-center overflow-hidden">
                     <img id="profileImgP1" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" alt="Profile" class="w-full h-full object-cover rounded-full">
@@ -132,10 +132,10 @@
             <!-- MAIN LOADING PANEL CONTAINER -->
             <div class="w-full bg-white border border-[#D5EEE6] rounded-[28px] sm:rounded-[32px] pt-10 sm:pt-12 p-3.5 sm:p-6 soft-mint-shadow relative">
                 
-                <!-- MINT CONTENT BOX (กล่องเขียวมินต์ใหญ่) -->
+                <!-- MINT CONTENT BOX -->
                 <div class="bg-[#EAF6F2] border border-[#D5EEE6] rounded-[24px] sm:rounded-[28px] p-3.5 sm:p-6 text-center mb-4 sm:mb-5">
                     
-                    <!-- DESCRIPTION BOX (กล่องข้อความขาว) -->
+                    <!-- DESCRIPTION BOX -->
                     <div class="bg-white rounded-[18px] sm:rounded-[22px] border border-[#D5EEE6] shadow-sm p-4 sm:p-8 mb-4">
                         <h2 id="loadingText" class="text-[#263A36] text-sm sm:text-lg font-bold leading-relaxed">
                             กำลังเตรียมเว็บไซต์<br>กรุณารอสักครู่...
@@ -160,7 +160,7 @@
 
                 </div>
 
-                <!-- BOTTOM SECTION (รองรับมือถือด้วย Grid 1 คอลัมน์ และขยายเป็น 2 คอลัมน์บนจอใหญ่) -->
+                <!-- BOTTOM SECTION -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5 items-center">
                     
                     <!-- PREVIEW IMAGE -->
@@ -200,7 +200,7 @@
             <!-- MAIN PROFILE CONTAINER CARD -->
             <div class="w-full bg-white border border-[#D5EEE6] rounded-[28px] soft-mint-shadow p-3.5 sm:p-5 text-center relative mb-4 sm:mb-5 overflow-hidden">
                 
-                <!-- COVER BANNER (สัดส่วน 1080x580 ปรับตัวตามขนาดจอมือถืออย่างลงตัว) -->
+                <!-- COVER BANNER -->
                 <div class="w-full aspect-[1080/580] rounded-[18px] sm:rounded-[20px] overflow-hidden relative border border-[#D5EEE6] bg-[#DFF5ED]">
                     <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800" alt="Cover" class="w-full h-full object-cover">
                 </div>
@@ -369,38 +369,54 @@
 
 
         <!-- ============================================================ -->
-        <!-- PAGE 03 — REVIEW LIST PAGE                                   -->
+        <!-- PAGE 03 — REVIEW LIST PAGE (ปรับปรุงรูปแบบกล่องตามภาพ 6)     -->
         <!-- ============================================================ -->
-        <div id="page03" class="page-view w-full hidden flex-col">
+        <div id="page03" class="page-view w-full hidden flex-col relative">
             
-            <!-- STATS CONTAINER (ปรับเลย์เอาต์ตามจอมือถืออัตโนมัติ) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 mb-4 sm:mb-5">
-                <!-- CARD 1: TOTAL REVIEWS -->
-                <div class="bg-white border border-[#D5EEE6] rounded-[20px] sm:rounded-[22px] p-3.5 sm:p-4 soft-mint-shadow flex items-center justify-between">
-                    <div>
-                        <p class="text-[#78938C] text-xs font-medium">จำนวนรีวิวทั้งหมด</p>
-                        <p id="totalReviewsCount" class="text-lg sm:text-2xl font-extrabold text-[#263A36] mt-0.5 sm:mt-1">6 รายการ</p>
-                    </div>
-                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-[#DFF5ED] text-[#43B79B] flex items-center justify-center text-sm sm:text-base flex-shrink-0">
-                        <i class="fa-solid fa-comments"></i>
-                    </div>
+            <!-- HEADER SUBTITLE & TAB BAR (แบบรูปภาพ 6) -->
+            <div class="flex items-center justify-between mb-2.5 px-1">
+                <div>
+                    <span class="text-[10px] text-[#A3C7BD] font-semibold italic block">Kind words</span>
+                    <h3 class="text-sm font-bold text-[#263A36] flex items-center gap-1.5">
+                        <span>รีวิวจากลูกค้า</span>
+                    </h3>
                 </div>
-
-                <!-- CARD 2: AVERAGE RATING -->
-                <div class="bg-white border border-[#D5EEE6] rounded-[20px] sm:rounded-[22px] p-3.5 sm:p-4 soft-mint-shadow flex items-center justify-between">
-                    <div>
-                        <p class="text-[#78938C] text-xs font-medium">คะแนนความพึงพอใจเฉลี่ย</p>
-                        <p id="avgRatingPercent" class="text-lg sm:text-2xl font-extrabold text-[#263A36] mt-0.5 sm:mt-1">96% (4.8 / 5)</p>
-                    </div>
-                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-[#DFF5ED] text-[#43B79B] flex items-center justify-center text-sm sm:text-base flex-shrink-0">
-                        <i class="fa-solid fa-star"></i>
-                    </div>
+                
+                <div class="bg-white/80 border border-[#D5EEE6] rounded-full px-2.5 py-1 flex items-center gap-1.5 text-[10px] text-[#405A53] shadow-sm">
+                    <span class="w-2.5 h-2.5 rounded-sm bg-[#FFCA28] inline-block"></span>
+                    <span class="font-medium">หลักฐานการซื้อ-ขาย</span>
                 </div>
             </div>
 
-            <!-- REVIEW LIST CONTAINER -->
-            <div id="reviewListContainer" class="space-y-2.5 sm:space-y-3 mb-4 sm:mb-5">
+            <!-- STATS CONTAINER BLOCK (รวมเป็นกล่องเดียวแบ่งครึ่งสไตล์ภาพ 6) -->
+            <div class="bg-white border border-[#D5EEE6] rounded-[24px] p-4 soft-mint-shadow flex items-center justify-between mb-4 relative overflow-hidden">
+                <!-- ฝั่งซ้าย: จำนวนรีวิวทั้งหมด -->
+                <div class="flex-1 text-center border-r border-[#EEFAF5] pr-2">
+                    <p id="totalReviewsCount" class="text-xl sm:text-2xl font-black text-[#263A36]">6</p>
+                    <p class="text-[#A3C7BD] text-[10px] font-medium mt-0.5">รีวิวทั้งหมด</p>
+                </div>
+
+                <!-- ฝั่งขวา: คะแนนร้าน -->
+                <div class="flex-1 text-center pl-2">
+                    <p id="avgRatingPercent" class="text-xl sm:text-2xl font-black text-[#263A36]">5.0</p>
+                    <p class="text-[#A3C7BD] text-[10px] font-medium mt-0.5 flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-star text-[#FFCA28] text-[9px]"></i>
+                        <span>คะแนนร้าน</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- REVIEW LIST CONTAINER (กล่องมินิมอลการ์ดขาวซ้อนไอคอนอัญประกาศ ตามภาพ 6) -->
+            <div id="reviewListContainer" class="space-y-3 mb-5">
                 <!-- Generated by JS -->
+            </div>
+
+            <!-- FLOATING WRITE REVIEW BUTTON (ปุ่มเขียนรีวิวลอยตามภาพ 6) -->
+            <div class="flex justify-end mb-4">
+                <button onclick="goToPage('page02')" class="bg-[#55BBA1] hover:bg-[#43A68D] text-white text-xs font-semibold px-4 py-2 rounded-full btn-mint-shadow flex items-center gap-1.5 transition-all active:scale-95">
+                    <i class="fa-solid fa-pen-to-square text-[11px]"></i>
+                    <span>เขียนรีวิว</span>
+                </button>
             </div>
 
             <!-- PAGINATION -->
@@ -480,7 +496,7 @@
 
 
     <!-- ============================================================ -->
-    <!-- FLOATING BOTTOM NAVIGATION BAR (ปรับให้เหมาะกับการแตะบนมือถือ) -->
+    <!-- FLOATING BOTTOM NAVIGATION BAR                               -->
     <!-- ============================================================ -->
     <nav id="bottomNav" class="fixed bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-50 bg-white/95 backdrop-blur-md border border-[#D5EEE6] rounded-full p-1.5 soft-mint-shadow flex items-center gap-1 max-w-[92vw]">
         <button id="navPage02" onclick="goToPage('page02')" class="px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-300 flex items-center gap-1 sm:gap-1.5 bg-[#43B79B] text-white shadow-md">
@@ -520,12 +536,12 @@
 
         // MOCK REVIEWS DATABASE
         let reviewsData = [
-            { id: 1, name: 'คุณสมชาย สายชิล', rating: 5, date: '28 ก.ย. 2026', comment: 'เว็บดีใช้ง่ายมากครับ บรรยากาศร้านน่ารักมาก โทนสีเขียวมินต์สบายตาที่สุด' },
-            { id: 2, name: 'คุณอารียา สุขใจ', rating: 5, date: '27 ก.ย. 2026', comment: 'ขนมอร่อยมาก บริการเป็นกันเอง ประทับใจการออกแบบเว็บไซต์ที่มินิมอลและน่ารักมากค่ะ' },
-            { id: 3, name: 'คุณกิตติศักดิ์ พัฒนา', rating: 4, date: '25 ก.ย. 2026', comment: 'ระบบใช้งานลื่นไหล สะดวก รวดเร็ว แนะนำให้ทุกคนมาลองใช้บริการครับ' },
-            { id: 4, name: 'คุณเมษา นฤมล', rating: 5, date: '24 ก.ย. 2026', comment: 'ชอบโทนสีและดีไซน์มากค่ะ ดูสะอาดและละมุนตามาก ให้ 5 ดาวไปเลย!' },
-            { id: 5, name: 'คุณณัฐพล คนขยัน', rating: 5, date: '20 ก.ย. 2026', comment: 'บริการดีมาก รวดเร็ว ใส่ใจลูกค้า ประทับใจครับ' },
-            { id: 6, name: 'คุณปรียาพร พรหม', rating: 5, date: '18 ก.ย. 2026', comment: 'รีวิวตรงปก เว็บใช้งานง่ายไม่ซับซ้อน ชอบมากๆ ค่ะ' }
+            { id: 1, name: 'Shi', rating: 5, date: '2026-09-26 20:53:19', comment: 'เว็บดีใช้ง่ายมากคับ ตอบไวบริการดี' },
+            { id: 2, name: 'K.', rating: 5, date: '2026-09-25 15:46:53', comment: 'ส่งเร็วมากก' },
+            { id: 3, name: 'sy', rating: 5, date: '2026-09-23 00:49:26', comment: '+1 ค้าบ แม่ค้าบริการดีต่อใจมาก' },
+            { id: 4, name: 'คุณเมษา นฤมล', rating: 5, date: '2026-09-20 18:22:10', comment: 'ชอบโทนสีและดีไซน์มากค่ะ ดูสะอาดและละมุนตามาก ให้ 5 ดาวไปเลย!' },
+            { id: 5, name: 'คุณณัฐพล คนขยัน', rating: 5, date: '2026-09-18 12:10:00', comment: 'บริการดีมาก รวดเร็ว ใส่ใจลูกค้า ประทับใจครับ' },
+            { id: 6, name: 'คุณปรียาพร พรหม', rating: 5, date: '2026-09-15 09:05:40', comment: 'รีวิวตรงปก เว็บใช้งานง่ายไม่ซับซ้อน ชอบมากๆ ค่ะ' }
         ];
 
         // --- INIT APP ---
@@ -677,7 +693,7 @@
             }
 
             const today = new Date();
-            const dateStr = `${today.getDate()} ก.ย. ${today.getFullYear()}`;
+            const dateStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')} ${String(today.getHours()).padStart(2,'0')}:${String(today.getMinutes()).padStart(2,'0')}:${String(today.getSeconds()).padStart(2,'0')}`;
 
             const newReview = {
                 id: Date.now(),
@@ -701,7 +717,7 @@
             goToPage('page03');
         }
 
-        // --- RENDER REVIEWS FOR PAGE 03 ---
+        // --- RENDER REVIEWS FOR PAGE 03 (รูปแบบบล็อกการ์ดสไตล์ภาพ 6) ---
         function renderReviews() {
             const container = document.getElementById('reviewListContainer');
             container.innerHTML = '';
@@ -719,31 +735,40 @@
                 let starsHtml = '';
                 for (let i = 1; i <= 5; i++) {
                     if (i <= item.rating) {
-                        starsHtml += `<i class="fa-solid fa-star text-[#43B79B] text-[10px]"></i>`;
+                        starsHtml += `<i class="fa-solid fa-star text-[#FFCA28] text-[10px]"></i>`;
                     } else {
-                        starsHtml += `<i class="fa-solid fa-star text-[#D5EEE6] text-[10px]"></i>`;
+                        starsHtml += `<i class="fa-solid fa-star text-[#E5F5F0] text-[10px]"></i>`;
                     }
                 }
 
                 const card = document.createElement('div');
-                card.className = "bg-white border border-[#D5EEE6] rounded-[18px] sm:rounded-[20px] p-3 sm:p-3.5 soft-mint-shadow transition-all hover:translate-y-[-1px]";
+                card.className = "bg-white border border-[#D5EEE6] rounded-[20px] p-3.5 soft-mint-shadow relative overflow-hidden transition-all hover:translate-y-[-1px]";
                 card.innerHTML = `
-                    <div class="flex items-center justify-between gap-2 mb-1.5">
-                        <div class="flex items-center gap-2">
-                            <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#EEFAF5] border border-[#D5EEE6] flex items-center justify-center text-[#267A69] font-bold text-[10px] sm:text-[11px] flex-shrink-0">
-                                ${item.name.charAt(0) || 'C'}
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-[#263A36] text-xs">${item.name}</h4>
-                                <div class="flex items-center gap-0.5 mt-0.5">${starsHtml}</div>
-                            </div>
-                        </div>
-                        <span class="text-[9px] text-[#A3C7BD] bg-[#F7FFFC] border border-[#D5EEE6] px-2 py-0.5 rounded-full flex-shrink-0">
-                            ${item.date}
-                        </span>
+                    <!-- BACKGROUND QUOTE ICON (ไอคอนอัญประกาศมุมขวาอ้างอิงภาพ 6) -->
+                    <div class="absolute right-3 top-2 text-[#E5F5F0] text-xl font-serif pointer-events-none select-none">
+                        ”
                     </div>
-                    <p class="text-[#405A53] text-xs leading-relaxed pl-1 pt-0.5">
-                        "${item.comment}"
+
+                    <div class="flex items-start gap-2.5 mb-1 relative z-10">
+                        <div class="w-7 h-7 rounded-full bg-[#EEFAF5] border border-[#D5EEE6] flex items-center justify-center text-[#43B79B] font-semibold text-xs flex-shrink-0">
+                            ${item.name.charAt(0) || 'C'}
+                        </div>
+                        <div class="flex-grow min-w-0">
+                            <div class="flex items-center justify-between gap-1">
+                                <h4 class="font-bold text-[#263A36] text-xs truncate">${item.name}</h4>
+                            </div>
+                            <span class="text-[9px] text-[#A3C7BD] block">
+                                ${item.date}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-0.5 my-1 pl-0.5">
+                        ${starsHtml}
+                    </div>
+
+                    <p class="text-[#405A53] text-xs leading-relaxed pl-0.5 mt-1">
+                        ${item.comment}
                     </p>
                 `;
                 container.appendChild(card);
@@ -772,7 +797,7 @@
 
             for (let i = 1; i <= totalPages; i++) {
                 const btn = document.createElement('button');
-                btn.className = `w-7 h-7 rounded-full text-xs font-semibold transition-all ${i === currentReviewPage ? 'bg-[#43B79B] text-white shadow-sm' : 'bg-white text-[#267A69] border border-[#D5EEE6] hover:bg-[#DFF5ED]'}`;
+                btn.className = `w-7 h-7 rounded-full text-xs font-semibold transition-all ${i === currentReviewPage ? 'bg-[#55BBA1] text-white shadow-sm' : 'bg-white text-[#267A69] border border-[#D5EEE6] hover:bg-[#DFF5ED]'}`;
                 btn.textContent = i;
                 btn.onclick = () => {
                     currentReviewPage = i;
@@ -799,15 +824,14 @@
         // --- UPDATE SUMMARY STATS ---
         function updateSummaryStats() {
             const count = reviewsData.length;
-            document.getElementById('totalReviewsCount').textContent = `${count} รายการ`;
+            document.getElementById('totalReviewsCount').textContent = `${count}`;
 
             if (count > 0) {
                 const totalRating = reviewsData.reduce((acc, r) => acc + r.rating, 0);
                 const avg = (totalRating / count).toFixed(1);
-                const percent = Math.round((avg / 5) * 100);
-                document.getElementById('avgRatingPercent').textContent = `${percent}% (${avg} / 5)`;
+                document.getElementById('avgRatingPercent').textContent = `${avg}`;
             } else {
-                document.getElementById('avgRatingPercent').textContent = `100% (5.0 / 5)`;
+                document.getElementById('avgRatingPercent').textContent = `5.0`;
             }
         }
 
