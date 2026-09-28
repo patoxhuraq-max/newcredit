@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mint Profile & Review Platform</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -17,13 +17,20 @@
         * {
             font-family: 'Prompt', sans-serif;
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Polka Dot Background Pattern matching Ref Image 3 */
+        body {
+            background-color: #D6EFE7;
+            background-image: radial-gradient(#6B8E85 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+            min-height: 100vh;
+            color: #405A53;
         }
 
         /* Custom Mint Theme Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
-            height: 6px;
         }
         ::-webkit-scrollbar-track {
             background: #E8F8F2;
@@ -36,25 +43,12 @@
             background: #267A69;
         }
 
-        /* Custom Theme Background Gradient */
-        body {
-            background: radial-gradient(circle at center, #F4FFFB 0%, #E5F7F0 45%, #D8F2E9 100%);
-            min-height: 100vh;
-            color: #405A53;
-            overflow-x: hidden;
-        }
-
-        /* Custom Shadows */
+        /* Custom Soft Shadows */
         .soft-mint-shadow {
-            box-shadow: 0 10px 30px rgba(67, 183, 155, 0.12);
-        }
-        @media (min-width: 640px) {
-            .soft-mint-shadow {
-                box-shadow: 0 15px 45px rgba(67, 183, 155, 0.12);
-            }
+            box-shadow: 0 10px 30px rgba(45, 90, 80, 0.08);
         }
         .btn-mint-shadow {
-            box-shadow: 0 4px 14px rgba(67, 183, 155, 0.22);
+            box-shadow: 0 6px 18px rgba(67, 183, 155, 0.22);
         }
 
         /* Page Transition Animation */
@@ -75,9 +69,9 @@
 
         /* Pulse Animation */
         @keyframes pulseRing {
-            0% { transform: scale(0.98); opacity: 0.8; }
-            50% { transform: scale(1.03); opacity: 0.4; }
-            100% { transform: scale(0.98); opacity: 0.8; }
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 0.4; }
+            100% { transform: scale(0.95); opacity: 0.8; }
         }
         .pulse-ring {
             animation: pulseRing 3s infinite ease-in-out;
@@ -96,13 +90,6 @@
             color: #A3C7BD;
             cursor: pointer;
             transition: all 0.2s ease;
-            flex-shrink: 0;
-        }
-        @media (min-width: 640px) {
-            .star-circle {
-                width: 36px;
-                height: 36px;
-            }
         }
         .star-circle.active {
             background-color: #DFF5ED;
@@ -110,62 +97,62 @@
             color: #267A69;
             box-shadow: 0 0 10px rgba(67, 183, 155, 0.25);
         }
-        .star-circle:active, .star-circle:hover {
-            transform: scale(1.1);
+        .star-circle:hover {
+            transform: scale(1.12);
         }
     </style>
 </head>
-<body class="flex flex-col min-h-screen relative pb-28 pt-4 sm:pt-8">
+<body class="flex flex-col min-h-screen relative pb-28 items-center justify-center p-3 sm:p-6">
 
     <!-- HIDDEN FILE INPUT FOR PROFILE UPLOAD -->
     <input type="file" id="profileFileInput" accept="image/*" class="hidden" onchange="handleProfileUpload(event)">
 
-    <!-- MAIN APP CONTAINER -->
-    <main class="flex-grow flex items-center justify-center p-3 sm:p-6 md:p-8 w-full max-w-full">
+    <!-- MAIN WRAPPER CARD (INNER TALL WHITE CONTAINER MATCHING IMAGE 3) -->
+    <div class="w-full max-w-[540px] bg-white/80 backdrop-blur-md border border-[#D5EEE6] rounded-[38px] p-4 sm:p-6 soft-mint-shadow relative my-auto">
 
         <!-- ============================================================ -->
         <!-- PAGE 01 — LOADING / ENTRY PAGE                               -->
         <!-- ============================================================ -->
-        <div id="page01" class="page-view w-full max-w-[900px] flex flex-col items-center relative my-auto">
+        <div id="page01" class="page-view w-full flex flex-col items-center relative">
             
-            <!-- PROFILE CIRCLE (SIZE 720PX & POSITIONED HIGH ABOVE THE MAIN CARD) -->
-            <div class="relative z-20 mb-8 sm:mb-12 group cursor-pointer w-full flex justify-center" onclick="triggerProfileUpload()" title="คลิกเพื่อเปลี่ยนรูปโปรไฟล์">
-                <div class="w-full max-w-[720px] aspect-square rounded-full p-2 sm:p-3 bg-white border-4 border-[#D5EEE6] soft-mint-shadow relative flex items-center justify-center overflow-hidden">
-                    <img id="profileImgP1" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1200" alt="Profile" class="w-full h-full object-cover rounded-full">
+            <!-- PROFILE CIRCLE -->
+            <div class="relative z-20 -mb-10 group cursor-pointer" onclick="triggerProfileUpload()" title="คลิกเพื่อเปลี่ยนรูปโปรไฟล์">
+                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 bg-white border-2 border-[#D5EEE6] soft-mint-shadow relative flex items-center justify-center overflow-hidden">
+                    <img id="profileImgP1" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" alt="Profile" class="w-full h-full object-cover rounded-full">
                     
                     <div class="absolute inset-0 bg-[#263A36]/40 rounded-full flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <i class="fa-solid fa-camera text-white text-3xl sm:text-5xl md:text-6xl"></i>
-                        <span class="text-white text-sm sm:text-lg md:text-xl mt-2 font-light">เปลี่ยนรูปโปรไฟล์</span>
+                        <i class="fa-solid fa-camera text-white text-lg"></i>
+                        <span class="text-white text-[10px] mt-1 font-light">เปลี่ยนรูป</span>
                     </div>
                 </div>
-                <div class="absolute inset-0 -m-2 sm:-m-3 rounded-full border-2 border-[#43B79B]/30 pulse-ring pointer-events-none"></div>
+                <div class="absolute inset-0 -m-1 rounded-full border border-[#43B79B]/30 pulse-ring pointer-events-none"></div>
             </div>
 
             <!-- MAIN LOADING PANEL -->
-            <div class="w-full bg-white border border-[#D5EEE6] rounded-[28px] sm:rounded-[40px] pt-8 sm:pt-12 p-4 sm:p-8 md:p-10 soft-mint-shadow relative">
+            <div class="w-full bg-white border border-[#D5EEE6] rounded-[32px] pt-14 p-4 sm:p-6 soft-mint-shadow relative">
                 
                 <!-- MINT CONTENT BOX -->
-                <div class="bg-[#DFF5ED] border border-[#C8E9DF] rounded-[22px] sm:rounded-[35px] p-4 sm:p-8 md:p-10 text-center mb-6 sm:mb-8">
+                <div class="bg-[#EEFAF5] border border-[#D5EEE6] rounded-[24px] p-4 sm:p-5 text-center mb-5">
                     
                     <!-- DESCRIPTION BOX -->
-                    <div class="bg-white rounded-[18px] sm:rounded-[25px] border border-[#D5EEE6] shadow-sm max-w-[650px] mx-auto p-4 sm:p-8 mb-5 sm:mb-6">
-                        <h2 id="loadingText" class="text-[#263A36] text-base sm:text-xl md:text-2xl font-semibold leading-relaxed">
+                    <div class="bg-white rounded-[20px] border border-[#D5EEE6] shadow-sm p-4 mb-4">
+                        <h2 id="loadingText" class="text-[#263A36] text-sm sm:text-base font-semibold leading-relaxed">
                             กำลังเตรียมเว็บไซต์<br>กรุณารอสักครู่...
                         </h2>
                     </div>
 
                     <!-- LOADING STATUS TEXT -->
-                    <p id="loadingStatusText" class="text-[#43B79B] font-medium text-xs sm:text-base mb-5 sm:mb-6 flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-circle-notch fa-spin text-[#43B79B]"></i>
+                    <p id="loadingStatusText" class="text-[#43B79B] font-medium text-xs mb-4 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-circle-notch fa-spin"></i>
                         <span>พร้อมเข้าสู่เว็บไซต์!</span>
                     </p>
 
                     <!-- ON / OFF TOGGLE -->
-                    <div class="inline-flex bg-white rounded-full p-1 border border-[#D5EEE6] shadow-inner w-56 sm:w-80 h-12 sm:h-14 items-center relative">
-                        <button id="toggleOn" onclick="setToggleStatus(true)" class="flex-1 h-full rounded-full font-semibold text-xs sm:text-base transition-all duration-300 bg-[#43B79B] text-white shadow-md">
+                    <div class="inline-flex bg-white rounded-full p-1 border border-[#D5EEE6] shadow-inner w-52 sm:w-60 h-11 items-center relative">
+                        <button id="toggleOn" onclick="setToggleStatus(true)" class="flex-1 h-full rounded-full font-semibold text-xs transition-all duration-300 bg-[#43B79B] text-white shadow-md">
                             On
                         </button>
-                        <button id="toggleOff" onclick="setToggleStatus(false)" class="flex-1 h-full rounded-full font-semibold text-xs sm:text-base transition-all duration-300 text-[#78938C]">
+                        <button id="toggleOff" onclick="setToggleStatus(false)" class="flex-1 h-full rounded-full font-semibold text-xs transition-all duration-300 text-[#78938C]">
                             Off
                         </button>
                     </div>
@@ -173,28 +160,26 @@
                 </div>
 
                 <!-- BOTTOM PREVIEW SECTION -->
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 items-center">
+                <div class="flex flex-col gap-4 items-center">
                     
-                    <!-- LEFT: PREVIEW IMAGE & SLIDER -->
-                    <div class="md:col-span-7 relative group">
-                        <div class="w-full aspect-video rounded-[18px] sm:rounded-[20px] border border-[#D5EEE6] bg-[#F7FFFC] overflow-hidden relative soft-mint-shadow">
-                            <img id="previewImage" src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800" alt="Preview" class="w-full h-full object-cover transition-all duration-500">
-                            
-                            <div id="previewCaption" class="absolute bottom-2.5 left-2.5 right-2.5 sm:right-auto bg-[#263A36]/80 backdrop-blur-sm text-white text-[11px] sm:text-xs px-3 py-1.5 rounded-full border border-white/20 text-center sm:text-left truncate">
-                                1 / 3: ร้านบรรยากาศอบอุ่น สไตล์ Minimal Mint
-                            </div>
+                    <!-- PREVIEW IMAGE -->
+                    <div class="w-full aspect-video rounded-[18px] border border-[#D5EEE6] bg-[#F7FFFC] overflow-hidden relative soft-mint-shadow">
+                        <img id="previewImage" src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800" alt="Preview" class="w-full h-full object-cover">
+                        
+                        <div id="previewCaption" class="absolute bottom-2 left-2 bg-[#263A36]/75 backdrop-blur-sm text-white text-[10px] px-2.5 py-1 rounded-full border border-white/20">
+                            1 / 3: ร้านบรรยากาศอบอุ่น สไตล์ Minimal Mint
                         </div>
                     </div>
 
-                    <!-- RIGHT: BUTTONS -->
-                    <div class="md:col-span-5 flex flex-col gap-2.5 sm:gap-3.5">
-                        <button onclick="goToPage('page02')" class="w-full h-[52px] sm:h-[65px] bg-[#43B79B] hover:bg-[#39A188] active:scale-[0.98] text-white font-semibold text-sm sm:text-lg rounded-full btn-mint-shadow flex items-center justify-center gap-2.5 transition-all">
+                    <!-- BUTTONS -->
+                    <div class="w-full flex flex-col gap-2">
+                        <button onclick="goToPage('page02')" class="w-full h-[48px] bg-[#43B79B] hover:bg-[#39A188] active:scale-[0.98] text-white font-semibold text-xs sm:text-sm rounded-full btn-mint-shadow flex items-center justify-center gap-2 transition-all">
                             <span>เข้าสู่เว็บไซต์</span>
-                            <i class="fa-solid fa-arrow-right text-sm sm:text-base"></i>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </button>
 
-                        <button onclick="exitWebsite()" class="w-full h-[52px] sm:h-[65px] bg-white border-2 border-[#D5EEE6] hover:bg-[#E8F8F2] text-[#405A53] hover:text-[#267A69] active:scale-[0.98] font-semibold text-sm sm:text-lg rounded-full flex items-center justify-center gap-2.5 transition-all">
-                            <i class="fa-solid fa-arrow-left text-sm sm:text-base"></i>
+                        <button onclick="exitWebsite()" class="w-full h-[48px] bg-white border border-[#D5EEE6] hover:bg-[#E8F8F2] text-[#405A53] hover:text-[#267A69] active:scale-[0.98] font-semibold text-xs sm:text-sm rounded-full flex items-center justify-center gap-2 transition-all">
+                            <i class="fa-solid fa-arrow-left text-[10px]"></i>
                             <span>ออกจากเว็บไซต์</span>
                         </button>
                     </div>
@@ -209,144 +194,172 @@
         <!-- ============================================================ -->
         <!-- PAGE 02 — HOME / PROFILE PAGE                                -->
         <!-- ============================================================ -->
-        <div id="page02" class="page-view w-full max-w-[900px] hidden flex-col items-center">
+        <div id="page02" class="page-view w-full hidden flex-col items-center">
             
-            <!-- HEADER CONTAINER -->
-            <div class="w-full bg-white border border-[#D5EEE6] rounded-[24px] sm:rounded-[35px] soft-mint-shadow p-3.5 sm:p-8 text-center relative mb-14 sm:mb-16">
-                <div class="h-24 sm:h-36 bg-gradient-to-r from-[#DFF5ED] via-[#E8F8F2] to-[#D8F2E9] rounded-[18px] sm:rounded-[25px] border border-[#D5EEE6] relative">
-                    <div class="absolute inset-0 flex items-center justify-center opacity-15">
-                        <i class="fa-solid fa-leaf text-4xl sm:text-6xl text-[#43B79B]"></i>
-                    </div>
+            <!-- MAIN PROFILE CONTAINER CARD -->
+            <div class="w-full bg-white border border-[#D5EEE6] rounded-[28px] soft-mint-shadow p-3.5 sm:p-5 text-center relative mb-5 overflow-hidden">
+                
+                <!-- COVER BANNER -->
+                <div class="w-full h-32 sm:h-40 rounded-[20px] overflow-hidden relative border border-[#D5EEE6] bg-[#DFF5ED]">
+                    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800" alt="Cover" class="w-full h-full object-cover">
                 </div>
 
-                <!-- OVERLAPPING PROFILE CIRCLE -->
-                <div class="absolute left-1/2 -translate-x-1/2 -bottom-10 sm:-bottom-12 z-10 group cursor-pointer" onclick="triggerProfileUpload()" title="คลิกเพื่อเปลี่ยนรูปโปรไฟล์">
-                    <div class="w-20 h-20 sm:w-28 sm:h-28 rounded-full p-1 bg-white border-2 border-[#D5EEE6] soft-mint-shadow overflow-hidden relative">
-                        <img id="profileImgP2" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" alt="Profile" class="w-full h-full object-cover rounded-full">
-                        <div class="absolute inset-0 bg-[#263A36]/40 rounded-full flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                            <i class="fa-solid fa-camera text-white text-base sm:text-lg"></i>
+                <!-- OVERLAPPING PROFILE AVATAR -->
+                <div class="-mt-10 sm:-mt-12 mb-2 flex justify-center relative z-10">
+                    <div class="group cursor-pointer relative" onclick="triggerProfileUpload()" title="คลิกเพื่อเปลี่ยนรูปโปรไฟล์">
+                        <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full p-1 bg-white border-2 border-[#D5EEE6] soft-mint-shadow overflow-hidden relative">
+                            <img id="profileImgP2" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" alt="Profile" class="w-full h-full object-cover rounded-full">
+                            <div class="absolute inset-0 bg-[#263A36]/40 rounded-full flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <i class="fa-solid fa-camera text-white text-xs"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- PROFILE INFORMATION -->
-            <div class="text-center mb-6 sm:mb-8 px-2 sm:px-4">
-                <h1 id="shopNameDisplay" class="text-xl sm:text-3xl font-bold text-[#263A36] mb-1.5 sm:mb-2">
-                    Minty Cafe & Studio
-                </h1>
-                <p id="shopDescDisplay" class="text-[#78938C] text-xs sm:text-base max-w-md mx-auto leading-relaxed">
-                    บริการกาแฟสด เบเกอรี่โฮมเมด และพื้นที่พักผ่อนสไตล์ซอฟต์มินต์ อบอุ่น เป็นกันเอง
+                <!-- SUBTITLE & PROFILE NAME -->
+                <p class="text-[9px] sm:text-[10px] text-[#78938C] uppercase tracking-widest font-semibold mb-0.5">
+                    WELCOME TO
                 </p>
-            </div>
+                <h1 id="shopNameDisplay" class="text-lg sm:text-xl font-bold text-[#267A69] tracking-wider mb-1">
+                    MISAESOLLY
+                </h1>
+                <p id="shopDescDisplay" class="text-[#78938C] text-xs max-w-xs mx-auto italic mb-5">
+                    " บริการด้วยความใส่ใจทุกขั้นตอน "
+                </p>
 
-            <!-- CATEGORY DROPDOWN -->
-            <div class="w-full mb-6 sm:mb-8">
-                <div class="bg-white border-2 border-[#D5EEE6] rounded-[22px] sm:rounded-[30px] p-4 sm:p-6 soft-mint-shadow relative">
-                    <!-- HEADER / TOGGLE CLICK -->
-                    <button onclick="toggleCategoryDropdown()" class="w-full flex items-center justify-between text-left sm:text-center relative focus:outline-none pr-6">
-                        <span class="w-full text-[#263A36] font-bold text-sm sm:text-xl tracking-wide">
-                            ข้อควรรู้ก่อนติดต่อ / หมวดหมู่บริการ
-                        </span>
-                        <i id="dropdownArrow" class="fa-solid fa-chevron-up text-[#43B79B] text-sm sm:text-base transition-transform duration-300 absolute right-0 top-1/2 -translate-y-1/2"></i>
-                    </button>
+                <!-- CATEGORY / ACCORDION BOX -->
+                <div class="w-full text-left mb-3.5">
+                    <div class="bg-white border border-[#D5EEE6] rounded-[20px] p-3.5 soft-mint-shadow relative">
+                        <button onclick="toggleCategoryDropdown()" class="w-full flex items-center justify-between text-center relative focus:outline-none">
+                            <span class="w-full text-[#263A36] font-semibold text-xs tracking-wide">
+                                ข้อควรรู้ก่อนติดต่อ
+                            </span>
+                            <i id="dropdownArrow" class="fa-solid fa-chevron-down text-[#43B79B] text-[10px] transition-transform duration-300 absolute right-1"></i>
+                        </button>
 
-                    <!-- DROPDOWN CONTENT (INNER MINT CARD WITH BULLET POINTS) -->
-                    <div id="categoryMenu" class="mt-4 sm:mt-5 bg-[#EEFAF5] border border-[#D5EEE6] rounded-[18px] sm:rounded-[22px] p-3.5 sm:p-6 text-left transition-all">
-                        <ul class="space-y-2.5 sm:space-y-3 text-[#405A53] text-xs sm:text-base">
-                            <li class="flex items-start gap-2.5 sm:gap-3">
-                                <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#43B79B] mt-1.5 sm:mt-2 flex-shrink-0"></span>
-                                <span>ทางร้านตอบแชทตามลำดับคิว กรุณารอสักครู่ครับ</span>
-                            </li>
-                            <li class="flex items-start gap-2.5 sm:gap-3">
-                                <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#43B79B] mt-1.5 sm:mt-2 flex-shrink-0"></span>
-                                <span>เวลาทำการตอบแชท 09:00 - 22:00 น.</span>
-                            </li>
-                            <li class="flex items-start gap-2.5 sm:gap-3">
-                                <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#43B79B] mt-1.5 sm:mt-2 flex-shrink-0"></span>
-                                <span>เตรียมรายละเอียดบริการหรือสินค้าที่ต้องการเพื่อความรวดเร็ว</span>
-                            </li>
-                            <li class="flex items-start gap-2.5 sm:gap-3">
-                                <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#43B79B] mt-1.5 sm:mt-2 flex-shrink-0"></span>
-                                <span>หากไม่ได้รับการตอบกลับภายใน 24 ชม. สามารถทักซ้ำได้ครับ</span>
-                            </li>
-                        </ul>
+                        <div id="categoryMenu" class="mt-3 bg-[#EEFAF5] border border-[#D5EEE6] rounded-[16px] p-3.5 text-left transition-all">
+                            <ul id="rulesListDisplay" class="space-y-2 text-[#405A53] text-xs">
+                                <li class="flex items-start gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#43B79B] mt-1.5 flex-shrink-0"></span>
+                                    <span>ทางร้านตอบแชทตามลำดับคิว กรุณารอสักครู่ครับ</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#43B79B] mt-1.5 flex-shrink-0"></span>
+                                    <span>เวลาทำการตอบแชท 09:00 - 22:00 น.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#43B79B] mt-1.5 flex-shrink-0"></span>
+                                    <span>เตรียมรายละเอียดบริการหรือสินค้าที่ต้องการเพื่อความรวดเร็ว</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+
+                <!-- LINK ITEMS -->
+                <div class="space-y-2.5">
+                    <div class="bg-white border border-[#D5EEE6] rounded-[18px] p-3 flex items-center justify-between soft-mint-shadow hover:border-[#43B79B] transition-all cursor-pointer">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-7 h-7 rounded-full bg-[#EEFAF5] text-[#43B79B] flex items-center justify-center text-xs">
+                                <i class="fa-brands fa-line"></i>
+                            </div>
+                            <div class="text-left">
+                                <p class="text-xs font-semibold text-[#263A36]">LINE Official Account</p>
+                                <p class="text-[10px] text-[#78938C]">@089cenvd</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-[#A3C7BD]"></i>
+                    </div>
+
+                    <div class="bg-white border border-[#D5EEE6] rounded-[18px] p-3 flex items-center justify-between soft-mint-shadow hover:border-[#43B79B] transition-all cursor-pointer" onclick="goToPage('page03')">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-7 h-7 rounded-full bg-[#EEFAF5] text-[#43B79B] flex items-center justify-center text-xs">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="text-left">
+                                <p class="text-xs font-semibold text-[#263A36]">Check Credit</p>
+                                <p class="text-[10px] text-[#78938C]">Credit & Reviews</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-[#A3C7BD]"></i>
+                    </div>
+                </div>
+
             </div>
 
+
             <!-- REVIEW FORM CARD -->
-            <div class="w-full bg-[#E8F8F2] border-2 border-[#D5EEE6] rounded-[28px] sm:rounded-[38px] p-2.5 sm:p-4 soft-mint-shadow mb-6 sm:mb-8">
-                <div class="w-full bg-white border border-[#D5EEE6] rounded-[22px] sm:rounded-[30px] p-4 sm:p-8">
+            <div class="w-full bg-[#EEFAF5] border border-[#D5EEE6] rounded-[28px] p-3 soft-mint-shadow mb-4">
+                <div class="w-full bg-white border border-[#D5EEE6] rounded-[22px] p-4">
                     
                     <!-- TOP SECTION -->
-                    <div class="flex items-center justify-between gap-2 mb-5 sm:mb-6">
-                        <div class="bg-[#F7FFFC] border-2 border-[#D5EEE6] rounded-[18px] sm:rounded-[22px] p-2 sm:p-3 text-center min-w-[75px] sm:min-w-[110px] shadow-sm">
-                            <p class="text-[#78938C] text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-0.5 sm:mb-1">
-                                <i class="fa-regular fa-calendar-check text-[#43B79B] mr-0.5 sm:mr-1"></i>Date
+                    <div class="flex items-start justify-between gap-2 mb-4">
+                        <div class="bg-[#F7FFFC] border border-[#D5EEE6] rounded-[16px] p-2 text-center min-w-[80px] shadow-sm">
+                            <p class="text-[#78938C] text-[9px] font-semibold uppercase tracking-wider mb-0.5">
+                                <i class="fa-regular fa-calendar-check text-[#43B79B] mr-0.5"></i>Date
                             </p>
-                            <div class="bg-[#43B79B] text-white font-bold rounded-full py-0.5 sm:py-1 text-xs sm:text-base my-0.5 shadow-sm">
+                            <div class="bg-[#43B79B] text-white font-bold rounded-full py-0.5 text-xs my-0.5 shadow-sm">
                                 <span id="currentDateDayDisplay">28</span>
                             </div>
-                            <p id="currentDateMonthYearDisplay" class="text-[#267A69] text-[9px] sm:text-xs font-medium mt-0.5 sm:mt-1">
+                            <p id="currentDateMonthYearDisplay" class="text-[#267A69] text-[9px] font-medium">
                                 ก.ย. 2026
                             </p>
                         </div>
 
-                        <div class="text-right flex flex-col items-end">
-                            <span class="inline-block bg-[#DFF5ED] text-[#267A69] text-[10px] sm:text-xs font-bold px-2.5 py-0.5 sm:py-1 rounded-full border border-[#C8E9DF] mb-1 sm:mb-2">
+                        <div class="text-right flex flex-col items-end pt-0.5">
+                            <span class="inline-block bg-[#DFF5ED] text-[#267A69] text-[10px] font-bold px-2 py-0.5 rounded-full border border-[#C8E9DF] mb-1">
                                 Review Form ✍️
                             </span>
-                            <h3 class="text-[#43B79B] font-bold text-xs sm:text-base leading-tight">
+                            <h3 class="text-[#43B79B] font-bold text-xs leading-tight">
                                 plus one for me
                             </h3>
-                            <p class="text-[#78938C] text-[10px] sm:text-xs font-light mt-0.5">
+                            <p class="text-[#78938C] text-[10px] font-light mt-0.5">
                                 thank you nakab
                             </p>
                         </div>
                     </div>
 
                     <!-- INPUT SECTION -->
-                    <div class="mb-4 sm:mb-5">
-                        <label class="block text-[#263A36] font-semibold text-xs sm:text-base mb-1.5 sm:mb-2">
+                    <div class="mb-3.5">
+                        <label class="block text-[#263A36] font-semibold text-xs mb-1">
                             ใส่ชื่อลูกค้า :
                         </label>
-                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
-                            <div class="flex-grow bg-[#F7FFFC] border-2 border-[#D5EEE6] rounded-full px-3.5 sm:px-4 py-2.5 sm:py-3.5 focus-within:border-[#43B79B] focus-within:ring-2 focus-within:ring-[#43B79B]/20 transition-all flex items-center shadow-inner">
-                                <input type="text" id="inputCustomerName" placeholder="กรุณาใส่ชื่อของคุณ..." class="w-full bg-transparent text-[#263A36] text-xs sm:text-base outline-none">
+                        <div class="flex items-center gap-2">
+                            <div class="flex-grow bg-[#F7FFFC] border border-[#D5EEE6] rounded-full px-3 py-2 focus-within:border-[#43B79B] transition-all shadow-inner">
+                                <input type="text" id="inputCustomerName" placeholder="กรุณาใส่ชื่อของคุณ..." class="w-full bg-transparent text-[#263A36] text-xs outline-none">
                             </div>
                             
-                            <button onclick="submitReview()" class="h-[44px] sm:h-[52px] px-5 sm:px-6 bg-[#43B79B] hover:bg-[#39A188] active:scale-[0.96] text-white font-semibold rounded-full btn-mint-shadow text-xs sm:text-base flex items-center justify-center gap-2 flex-shrink-0 transition-all">
-                                <i class="fa-solid fa-paper-plane text-xs sm:text-base"></i>
-                                <span>บันทึกและส่งรีวิว</span>
+                            <button onclick="submitReview()" class="h-[38px] px-3.5 bg-[#43B79B] hover:bg-[#39A188] active:scale-[0.96] text-white font-semibold rounded-full btn-mint-shadow text-xs flex items-center justify-center gap-1 flex-shrink-0 transition-all">
+                                <i class="fa-solid fa-paper-plane text-[10px]"></i>
+                                <span>บันทึก</span>
                             </button>
                         </div>
                     </div>
 
                     <!-- CUSTOMER REVIEW TEXTAREA BOX -->
-                    <div class="mb-4 sm:mb-5">
-                        <label class="block text-[#263A36] font-semibold text-xs sm:text-base mb-1.5 sm:mb-2">
+                    <div class="mb-3.5">
+                        <label class="block text-[#263A36] font-semibold text-xs mb-1">
                             รีวิวจากลูกค้า :
                         </label>
-                        <div class="bg-[#F7FFFC] border-2 border-[#D5EEE6] rounded-[18px] sm:rounded-[22px] p-3 sm:p-3.5 focus-within:border-[#43B79B] focus-within:ring-2 focus-within:ring-[#43B79B]/20 transition-all shadow-inner">
-                            <textarea id="inputCustomerReview" rows="3" placeholder="พิมพ์รีวิวและ ความประทับใจของคุณที่นี่..." class="w-full bg-transparent text-[#263A36] text-xs sm:text-base outline-none resize-none leading-relaxed"></textarea>
+                        <div class="bg-[#F7FFFC] border border-[#D5EEE6] rounded-[16px] p-2.5 focus-within:border-[#43B79B] transition-all shadow-inner">
+                            <textarea id="inputCustomerReview" rows="3" placeholder="พิมพ์รีวิวและความประทับใจของคุณที่นี่..." class="w-full bg-transparent text-[#263A36] text-xs outline-none resize-none leading-relaxed"></textarea>
                         </div>
                     </div>
 
                     <!-- CIRCLE STAR RATING CONTAINER -->
-                    <div class="bg-[#F7FFFC] border-2 border-[#D5EEE6] rounded-[20px] sm:rounded-full p-2.5 sm:p-3 px-3 sm:px-5 flex flex-col sm:flex-row items-center justify-between gap-2">
-                        <span class="text-[#263A36] font-semibold text-xs sm:text-sm flex items-center gap-1.5">
+                    <div class="bg-[#F7FFFC] border border-[#D5EEE6] rounded-full p-2 px-3 flex items-center justify-between flex-wrap gap-1.5">
+                        <span class="text-[#263A36] font-semibold text-[11px] flex items-center gap-1">
                             <i class="fa-solid fa-star text-[#43B79B]"></i>
-                            ให้คะแนนความพึงพอใจ :
+                            ให้คะแนน :
                         </span>
                         
-                        <div class="flex items-center gap-1.5 sm:gap-2 max-w-full overflow-x-auto py-1" id="starRatingContainer">
-                            <div class="star-circle active" onclick="setRating(1)"><i class="fa-solid fa-star text-[10px] sm:text-xs"></i></div>
-                            <div class="star-circle active" onclick="setRating(2)"><i class="fa-solid fa-star text-[10px] sm:text-xs"></i></div>
-                            <div class="star-circle active" onclick="setRating(3)"><i class="fa-solid fa-star text-[10px] sm:text-xs"></i></div>
-                            <div class="star-circle active" onclick="setRating(4)"><i class="fa-solid fa-star text-[10px] sm:text-xs"></i></div>
-                            <div class="star-circle active" onclick="setRating(5)"><i class="fa-solid fa-star text-[10px] sm:text-xs"></i></div>
-                            <span id="ratingScoreText" class="text-xs font-bold text-[#267A69] ml-1 flex-shrink-0">(5 / 5)</span>
+                        <div class="flex items-center gap-1" id="starRatingContainer">
+                            <div class="star-circle active" onclick="setRating(1)"><i class="fa-solid fa-star text-[9px]"></i></div>
+                            <div class="star-circle active" onclick="setRating(2)"><i class="fa-solid fa-star text-[9px]"></i></div>
+                            <div class="star-circle active" onclick="setRating(3)"><i class="fa-solid fa-star text-[9px]"></i></div>
+                            <div class="star-circle active" onclick="setRating(4)"><i class="fa-solid fa-star text-[9px]"></i></div>
+                            <div class="star-circle active" onclick="setRating(5)"><i class="fa-solid fa-star text-[9px]"></i></div>
+                            <span id="ratingScoreText" class="text-[10px] font-bold text-[#267A69] ml-0.5">(5/5)</span>
                         </div>
                     </div>
 
@@ -357,60 +370,133 @@
 
 
         <!-- ============================================================ -->
-        <!-- PAGE 03 — REVIEW LIST PAGE                                   -->
+        <!-- PAGE 03 — REVIEW LIST PAGE (MATCHING IMAGE 2 EXACTLY)        -->
         <!-- ============================================================ -->
-        <div id="page03" class="page-view w-full max-w-[900px] hidden flex-col">
+        <div id="page03" class="page-view w-full hidden flex-col">
             
-            <!-- TOP SUMMARY CONTAINER -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-5 sm:mb-6">
-                <div class="bg-white border border-[#D5EEE6] rounded-[18px] sm:rounded-[20px] p-4 sm:p-5 soft-mint-shadow flex items-center justify-between">
+            <!-- STATS CONTAINER (EXACT MATCH FOR REF IMAGE 2 SIDE-BY-SIDE CARDS) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+                <!-- CARD 1: TOTAL REVIEWS -->
+                <div class="bg-white border border-[#D5EEE6] rounded-[22px] p-4 soft-mint-shadow flex items-center justify-between">
                     <div>
-                        <p class="text-[#78938C] text-xs sm:text-sm font-medium">จำนวนรีวิวทั้งหมด</p>
-                        <p id="totalReviewsCount" class="text-xl sm:text-3xl font-bold text-[#263A36] mt-0.5 sm:mt-1">12 รายการ</p>
+                        <p class="text-[#78938C] text-xs font-medium">จำนวนรีวิวทั้งหมด</p>
+                        <p id="totalReviewsCount" class="text-xl sm:text-2xl font-extrabold text-[#263A36] mt-1">6 รายการ</p>
                     </div>
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#DFF5ED] text-[#43B79B] flex items-center justify-center text-lg sm:text-xl">
-                        <i class="fa-solid fa-comments text-[#43B79B]"></i>
+                    <div class="w-10 h-10 rounded-2xl bg-[#DFF5ED] text-[#43B79B] flex items-center justify-center text-base flex-shrink-0">
+                        <i class="fa-solid fa-comments"></i>
                     </div>
                 </div>
 
-                <div class="bg-white border border-[#D5EEE6] rounded-[18px] sm:rounded-[20px] p-4 sm:p-5 soft-mint-shadow flex items-center justify-between">
+                <!-- CARD 2: AVERAGE RATING -->
+                <div class="bg-white border border-[#D5EEE6] rounded-[22px] p-4 soft-mint-shadow flex items-center justify-between">
                     <div>
-                        <p class="text-[#78938C] text-xs sm:text-sm font-medium">คะแนนความพึงพอใจเฉลี่ย</p>
-                        <p id="avgRatingPercent" class="text-xl sm:text-3xl font-bold text-[#263A36] mt-0.5 sm:mt-1">98% (4.9 / 5)</p>
+                        <p class="text-[#78938C] text-xs font-medium">คะแนนความพึงพอใจเฉลี่ย</p>
+                        <p id="avgRatingPercent" class="text-xl sm:text-2xl font-extrabold text-[#263A36] mt-1">96% (4.8 / 5)</p>
                     </div>
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#DFF5ED] text-[#43B79B] flex items-center justify-center text-lg sm:text-xl">
+                    <div class="w-10 h-10 rounded-2xl bg-[#DFF5ED] text-[#43B79B] flex items-center justify-center text-base flex-shrink-0">
                         <i class="fa-solid fa-star"></i>
                     </div>
                 </div>
             </div>
 
             <!-- REVIEW LIST CONTAINER -->
-            <div id="reviewListContainer" class="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+            <div id="reviewListContainer" class="space-y-3 mb-5">
                 <!-- Generated by JS -->
             </div>
 
             <!-- PAGINATION -->
-            <div class="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap" id="paginationContainer">
+            <div class="flex items-center justify-center gap-1.5 flex-wrap" id="paginationContainer">
                 <!-- Generated by JS -->
             </div>
 
         </div>
 
-    </main>
+
+        <!-- ============================================================ -->
+        <!-- PAGE 04 — ADMIN PANEL PAGE                                   -->
+        <!-- ============================================================ -->
+        <div id="page04" class="page-view w-full hidden flex-col space-y-4">
+            
+            <!-- ADMIN HEADER -->
+            <div class="bg-white border border-[#D5EEE6] rounded-[24px] p-4 soft-mint-shadow text-center">
+                <h2 class="text-base font-bold text-[#267A69] flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <span>ระบบผู้ดูแลร้าน (Admin Panel)</span>
+                </h2>
+            </div>
+
+            <!-- SHOP INFO MANAGEMENT -->
+            <div class="bg-white border border-[#D5EEE6] rounded-[24px] p-4 soft-mint-shadow space-y-3">
+                <h3 class="text-xs font-semibold text-[#263A36] border-b border-[#EEFAF5] pb-2">
+                    <i class="fa-solid fa-store mr-1 text-[#43B79B]"></i> จัดการข้อมูลร้านค้า
+                </h3>
+
+                <div>
+                    <label class="block text-[11px] font-medium text-[#78938C] mb-1">ชื่อร้านค้า :</label>
+                    <input type="text" id="adminShopName" value="MISAESOLLY" class="w-full bg-[#F7FFFC] border border-[#D5EEE6] rounded-xl px-3 py-2 text-xs text-[#263A36] outline-none focus:border-[#43B79B]">
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-medium text-[#78938C] mb-1">คำอธิบายร้าน :</label>
+                    <input type="text" id="adminShopDesc" value="&quot; บริการด้วยความใส่ใจทุกขั้นตอน &quot;" class="w-full bg-[#F7FFFC] border border-[#D5EEE6] rounded-xl px-3 py-2 text-xs text-[#263A36] outline-none focus:border-[#43B79B]">
+                </div>
+
+                <button onclick="saveAdminShopInfo()" class="w-full py-2 bg-[#43B79B] hover:bg-[#39A188] text-white font-semibold rounded-xl text-xs transition-all shadow-sm">
+                    บันทึกข้อมูลร้าน
+                </button>
+            </div>
+
+            <!-- RULES / ANNOUNCEMENT MANAGEMENT -->
+            <div class="bg-white border border-[#D5EEE6] rounded-[24px] p-4 soft-mint-shadow space-y-3">
+                <h3 class="text-xs font-semibold text-[#263A36] border-b border-[#EEFAF5] pb-2">
+                    <i class="fa-solid fa-list-check mr-1 text-[#43B79B]"></i> จัดการ "ข้อควรรู้ก่อนติดต่อ"
+                </h3>
+
+                <div class="flex items-center gap-2">
+                    <input type="text" id="adminRuleInput" placeholder="เพิ่มข้อความใหม่..." class="flex-grow bg-[#F7FFFC] border border-[#D5EEE6] rounded-xl px-3 py-2 text-xs text-[#263A36] outline-none focus:border-[#43B79B]">
+                    <button onclick="addAdminRule()" class="px-3 py-2 bg-[#267A69] text-white rounded-xl text-xs font-semibold flex-shrink-0">
+                        เพิ่ม
+                    </button>
+                </div>
+
+                <div id="adminRulesList" class="space-y-1.5 pt-1">
+                    <!-- Generated by JS -->
+                </div>
+            </div>
+
+            <!-- REVIEWS MANAGEMENT -->
+            <div class="bg-white border border-[#D5EEE6] rounded-[24px] p-4 soft-mint-shadow space-y-3">
+                <h3 class="text-xs font-semibold text-[#263A36] border-b border-[#EEFAF5] pb-2">
+                    <i class="fa-solid fa-comments mr-1 text-[#43B79B]"></i> จัดการรายการรีวิว
+                </h3>
+
+                <div id="adminReviewsList" class="space-y-2 max-h-[250px] overflow-y-auto pr-1">
+                    <!-- Generated by JS -->
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 
 
     <!-- ============================================================ -->
     <!-- FLOATING BOTTOM NAVIGATION BAR                               -->
     <!-- ============================================================ -->
-    <nav id="bottomNav" class="fixed bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-50 bg-white/95 backdrop-blur-md border border-[#D5EEE6] rounded-full p-1.5 sm:p-2 soft-mint-shadow flex items-center gap-1 sm:gap-2 max-w-[92vw] sm:max-w-auto">
-        <button id="navPage02" onclick="goToPage('page02')" class="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-1.5 sm:gap-2 bg-[#43B79B] text-white shadow-md">
-            <i class="fa-solid fa-house text-xs sm:text-sm"></i>
+    <nav id="bottomNav" class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-white/95 backdrop-blur-md border border-[#D5EEE6] rounded-full p-1.5 soft-mint-shadow flex items-center gap-1 max-w-[95vw]">
+        <button id="navPage02" onclick="goToPage('page02')" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 bg-[#43B79B] text-white shadow-md">
+            <i class="fa-solid fa-house text-[10px]"></i>
             <span>หน้าหลัก</span>
         </button>
 
-        <button id="navPage03" onclick="goToPage('page03')" class="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-1.5 sm:gap-2 text-[#267A69] hover:bg-[#DFF5ED]">
-            <i class="fa-solid fa-star text-xs sm:text-sm"></i>
+        <button id="navPage03" onclick="goToPage('page03')" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 text-[#267A69] hover:bg-[#DFF5ED]">
+            <i class="fa-solid fa-star text-[10px]"></i>
             <span>รีวิวทั้งหมด</span>
+        </button>
+
+        <button id="navPage04" onclick="goToPage('page04')" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 text-[#267A69] hover:bg-[#DFF5ED]">
+            <i class="fa-solid fa-user-gear text-[10px]"></i>
+            <span>ผู้ดูแลระบบ</span>
         </button>
     </nav>
 
@@ -426,22 +512,32 @@
         let currentReviewPage = 1;
         const reviewsPerPage = 4;
 
+        // DYNAMIC STORE RULES
+        let shopRules = [
+            "ทางร้านตอบแชทตามลำดับคิว กรุณารอสักครู่ครับ",
+            "เวลาทำการตอบแชท 09:00 - 22:00 น.",
+            "เตรียมรายละเอียดบริการหรือสินค้าที่ต้องการเพื่อความรวดเร็ว"
+        ];
+
         // MOCK REVIEWS DATABASE
         let reviewsData = [
             { id: 1, name: 'คุณสมชาย สายชิล', rating: 5, date: '28 ก.ย. 2026', comment: 'เว็บดีใช้ง่ายมากครับ บรรยากาศร้านน่ารักมาก โทนสีเขียวมินต์สบายตาที่สุด' },
             { id: 2, name: 'คุณอารียา สุขใจ', rating: 5, date: '27 ก.ย. 2026', comment: 'ขนมอร่อยมาก บริการเป็นกันเอง ประทับใจการออกแบบเว็บไซต์ที่มินิมอลและน่ารักมากค่ะ' },
             { id: 3, name: 'คุณกิตติศักดิ์ พัฒนา', rating: 4, date: '25 ก.ย. 2026', comment: 'ระบบใช้งานลื่นไหล สะดวก รวดเร็ว แนะนำให้ทุกคนมาลองใช้บริการครับ' },
             { id: 4, name: 'คุณเมษา นฤมล', rating: 5, date: '24 ก.ย. 2026', comment: 'ชอบโทนสีและดีไซน์มากค่ะ ดูสะอาดและละมุนตามาก ให้ 5 ดาวไปเลย!' },
-            { id: 5, name: 'คุณณัฐพล คนขยัน', rating: 5, date: '20 ก.ย. 2026', comment: 'กาแฟรสชาติดีมาก บรรยากาศเหมาะแก่การมานั่งทำงานชิลๆ ครับ' },
+            { id: 5, name: 'คุณณัฐพล คนขยัน', rating: 5, date: '20 ก.ย. 2026', comment: 'บริการดีมาก รวดเร็ว ใส่ใจลูกค้า ประทับใจครับ' },
             { id: 6, name: 'คุณปรียาพร พรหม', rating: 5, date: '18 ก.ย. 2026', comment: 'รีวิวตรงปก เว็บใช้งานง่ายไม่ซับซ้อน ชอบมากๆ ค่ะ' }
         ];
 
         // --- INIT APP ---
         document.addEventListener('DOMContentLoaded', () => {
             updateDateDisplay();
+            renderRules();
             renderReviews();
             renderPagination();
             updateSummaryStats();
+            renderAdminRulesList();
+            renderAdminReviewsList();
 
             goToPage('page01');
         });
@@ -453,12 +549,14 @@
             document.getElementById('page01').classList.add('hidden');
             document.getElementById('page02').classList.add('hidden');
             document.getElementById('page03').classList.add('hidden');
+            document.getElementById('page04').classList.add('hidden');
 
             const targetPage = document.getElementById(pageId);
             targetPage.classList.remove('hidden');
 
             const nav02 = document.getElementById('navPage02');
             const nav03 = document.getElementById('navPage03');
+            const nav04 = document.getElementById('navPage04');
             const bottomNav = document.getElementById('bottomNav');
 
             if (pageId === 'page01') {
@@ -467,30 +565,30 @@
                 bottomNav.classList.remove('hidden');
             }
 
+            // Reset classes
+            nav02.className = "px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 text-[#267A69] hover:bg-[#DFF5ED]";
+            nav03.className = "px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 text-[#267A69] hover:bg-[#DFF5ED]";
+            nav04.className = "px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 text-[#267A69] hover:bg-[#DFF5ED]";
+
             if (pageId === 'page02') {
-                nav02.className = "px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-1.5 sm:gap-2 bg-[#43B79B] text-white shadow-md";
-                nav03.className = "px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-1.5 sm:gap-2 text-[#267A69] hover:bg-[#DFF5ED]";
+                nav02.className = "px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 bg-[#43B79B] text-white shadow-md";
             } else if (pageId === 'page03') {
-                nav03.className = "px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-1.5 sm:gap-2 bg-[#43B79B] text-white shadow-md";
-                nav02.className = "px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-1.5 sm:gap-2 text-[#267A69] hover:bg-[#DFF5ED]";
+                nav03.className = "px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 bg-[#43B79B] text-white shadow-md";
+            } else if (pageId === 'page04') {
+                nav04.className = "px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 bg-[#43B79B] text-white shadow-md";
             }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // --- EXIT WEBSITE ACTION (ACTUAL DIRECT EXIT/REDIRECT) ---
+        // --- EXIT WEBSITE ACTION ---
         function exitWebsite() {
-            // Attempt to close window directly
-            window.close();
-
-            // Fallback for security restrictions when window.close() is prevented
-            setTimeout(() => {
-                if (window.history.length > 1) {
-                    window.history.back();
-                } else {
-                    window.location.href = 'about:blank';
-                }
-            }, 100);
+            if (confirm('คุณต้องการออกจากเว็บไซต์ใช่หรือไม่?')) {
+                window.close();
+                setTimeout(() => {
+                    window.location.href = "about:blank";
+                }, 300);
+            }
         }
 
         // --- PROFILE IMAGE UPLOAD HANDLER ---
@@ -519,12 +617,12 @@
             const loadingText = document.getElementById('loadingText');
 
             if (isOn) {
-                btnOn.className = "flex-1 h-full rounded-full font-semibold text-xs sm:text-base transition-all duration-300 bg-[#43B79B] text-white shadow-md";
-                btnOff.className = "flex-1 h-full rounded-full font-semibold text-xs sm:text-base transition-all duration-300 text-[#78938C]";
+                btnOn.className = "flex-1 h-full rounded-full font-semibold text-xs transition-all duration-300 bg-[#43B79B] text-white shadow-md";
+                btnOff.className = "flex-1 h-full rounded-full font-semibold text-xs transition-all duration-300 text-[#78938C]";
                 loadingText.innerHTML = "กำลังเตรียมเว็บไซต์<br>กรุณารอสักครู่...";
             } else {
-                btnOff.className = "flex-1 h-full rounded-full font-semibold text-xs sm:text-base transition-all duration-300 bg-[#78938C] text-white shadow-md";
-                btnOn.className = "flex-1 h-full rounded-full font-semibold text-xs sm:text-base transition-all duration-300 text-[#78938C]";
+                btnOff.className = "flex-1 h-full rounded-full font-semibold text-xs transition-all duration-300 bg-[#78938C] text-white shadow-md";
+                btnOn.className = "flex-1 h-full rounded-full font-semibold text-xs transition-all duration-300 text-[#78938C]";
                 loadingText.innerHTML = "ระบบหยุดพักชั่วคราว<br>เลื่อนปุ่มเปิดเพื่อดำเนินการต่อ";
             }
         }
@@ -537,12 +635,24 @@
             arrow.classList.toggle('rotate-180');
         }
 
-        // --- STAR RATING CONTROLLER (CIRCLED STAR STYLE) ---
+        // --- RENDER SHOP RULES ---
+        function renderRules() {
+            const list = document.getElementById('rulesListDisplay');
+            list.innerHTML = '';
+            shopRules.forEach(rule => {
+                const li = document.createElement('li');
+                li.className = "flex items-start gap-2";
+                li.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-[#43B79B] mt-1.5 flex-shrink-0"></span><span>${rule}</span>`;
+                list.appendChild(li);
+            });
+        }
+
+        // --- STAR RATING CONTROLLER ---
         function setRating(rating) {
             currentRating = rating;
             const container = document.getElementById('starRatingContainer');
             const circles = container.querySelectorAll('.star-circle');
-            document.getElementById('ratingScoreText').textContent = `(${rating} / 5)`;
+            document.getElementById('ratingScoreText').textContent = `(${rating}/5)`;
 
             circles.forEach((circle, idx) => {
                 if (idx < rating) {
@@ -562,12 +672,7 @@
             const review = reviewInput.value.trim();
 
             if (!name || !review) {
-                nameInput.classList.add('border-red-400');
-                reviewInput.classList.add('border-red-400');
-                setTimeout(() => {
-                    nameInput.classList.remove('border-red-400');
-                    reviewInput.classList.remove('border-red-400');
-                }, 2000);
+                alert('กรุณากรอกชื่อและรีวิวของคุณให้ครบถ้วน');
                 return;
             }
 
@@ -590,7 +695,9 @@
             updateSummaryStats();
             renderReviews();
             renderPagination();
+            renderAdminReviewsList();
 
+            alert('ขอบคุณสำหรับรีวิวของคุณ!');
             goToPage('page03');
         }
 
@@ -604,7 +711,7 @@
             const pageReviews = reviewsData.slice(startIndex, endIndex);
 
             if (pageReviews.length === 0) {
-                container.innerHTML = `<div class="bg-white rounded-2xl p-6 sm:p-8 text-center text-[#78938C] text-sm">ยังไม่มีรายการรีวิว</div>`;
+                container.innerHTML = `<div class="bg-white rounded-2xl p-5 text-center text-[#78938C] text-xs">ยังไม่มีรายการรีวิว</div>`;
                 return;
             }
 
@@ -612,30 +719,30 @@
                 let starsHtml = '';
                 for (let i = 1; i <= 5; i++) {
                     if (i <= item.rating) {
-                        starsHtml += `<span class="inline-flex items-center justify-center w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#DFF5ED] text-[#267A69] text-[9px] sm:text-[10px]"><i class="fa-solid fa-star"></i></span>`;
+                        starsHtml += `<i class="fa-solid fa-star text-[#43B79B] text-[10px]"></i>`;
                     } else {
-                        starsHtml += `<span class="inline-flex items-center justify-center w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#F7FFFC] border border-[#D5EEE6] text-[#A3C7BD] text-[9px] sm:text-[10px]"><i class="fa-solid fa-star"></i></span>`;
+                        starsHtml += `<i class="fa-solid fa-star text-[#D5EEE6] text-[10px]"></i>`;
                     }
                 }
 
                 const card = document.createElement('div');
-                card.className = "bg-white border border-[#D5EEE6] rounded-[18px] sm:rounded-[25px] p-4 sm:p-6 soft-mint-shadow transition-all hover:translate-y-[-2px]";
+                card.className = "bg-white border border-[#D5EEE6] rounded-[20px] p-3.5 soft-mint-shadow transition-all hover:translate-y-[-1px]";
                 card.innerHTML = `
-                    <div class="flex items-start justify-between gap-2 mb-2.5 sm:mb-3">
-                        <div class="flex items-center gap-2.5 sm:gap-3">
-                            <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-[#DFF5ED] border border-[#C8E9DF] flex items-center justify-center text-[#267A69] font-bold text-sm sm:text-lg flex-shrink-0">
+                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                        <div class="flex items-center gap-2">
+                            <div class="w-7 h-7 rounded-full bg-[#EEFAF5] border border-[#D5EEE6] flex items-center justify-center text-[#267A69] font-bold text-[11px] flex-shrink-0">
                                 ${item.name.charAt(0) || 'C'}
                             </div>
                             <div>
-                                <h4 class="font-semibold text-[#263A36] text-xs sm:text-base">${item.name}</h4>
-                                <div class="flex items-center gap-0.5 sm:gap-1 mt-0.5 sm:mt-1">${starsHtml}</div>
+                                <h4 class="font-semibold text-[#263A36] text-xs">${item.name}</h4>
+                                <div class="flex items-center gap-0.5 mt-0.5">${starsHtml}</div>
                             </div>
                         </div>
-                        <span class="text-[10px] sm:text-xs text-[#78938C] bg-[#F7FFFC] border border-[#D5EEE6] px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full flex-shrink-0">
+                        <span class="text-[9px] text-[#A3C7BD] bg-[#F7FFFC] border border-[#D5EEE6] px-2 py-0.5 rounded-full flex-shrink-0">
                             ${item.date}
                         </span>
                     </div>
-                    <p class="text-[#405A53] text-xs sm:text-base leading-relaxed pl-1 sm:pl-2">
+                    <p class="text-[#405A53] text-xs leading-relaxed pl-1 pt-0.5">
                         "${item.comment}"
                     </p>
                 `;
@@ -651,8 +758,8 @@
             const totalPages = Math.ceil(reviewsData.length / reviewsPerPage) || 1;
 
             const prevBtn = document.createElement('button');
-            prevBtn.className = `w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border text-xs sm:text-sm font-semibold transition-all ${currentReviewPage === 1 ? 'border-[#D5EEE6] text-[#78938C] opacity-50 cursor-not-allowed' : 'border-[#D5EEE6] text-[#267A69] hover:bg-[#DFF5ED]'}`;
-            prevBtn.innerHTML = `<i class="fa-solid fa-chevron-left"></i>`;
+            prevBtn.className = `w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all ${currentReviewPage === 1 ? 'text-[#A3C7BD] opacity-40 cursor-not-allowed' : 'text-[#267A69] hover:bg-[#DFF5ED]'}`;
+            prevBtn.innerHTML = `<i class="fa-solid fa-chevron-left text-[10px]"></i>`;
             prevBtn.disabled = currentReviewPage === 1;
             prevBtn.onclick = () => {
                 if (currentReviewPage > 1) {
@@ -665,7 +772,7 @@
 
             for (let i = 1; i <= totalPages; i++) {
                 const btn = document.createElement('button');
-                btn.className = `w-8 h-8 sm:w-10 sm:h-10 rounded-full text-xs sm:text-sm font-semibold transition-all ${i === currentReviewPage ? 'bg-[#43B79B] text-white shadow-md' : 'bg-white text-[#267A69] border border-[#D5EEE6] hover:bg-[#DFF5ED]'}`;
+                btn.className = `w-7 h-7 rounded-full text-xs font-semibold transition-all ${i === currentReviewPage ? 'bg-[#43B79B] text-white shadow-sm' : 'bg-white text-[#267A69] border border-[#D5EEE6] hover:bg-[#DFF5ED]'}`;
                 btn.textContent = i;
                 btn.onclick = () => {
                     currentReviewPage = i;
@@ -676,8 +783,8 @@
             }
 
             const nextBtn = document.createElement('button');
-            nextBtn.className = `w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border text-xs sm:text-sm font-semibold transition-all ${currentReviewPage === totalPages ? 'border-[#D5EEE6] text-[#78938C] opacity-50 cursor-not-allowed' : 'border-[#D5EEE6] text-[#267A69] hover:bg-[#DFF5ED]'}`;
-            nextBtn.innerHTML = `<i class="fa-solid fa-chevron-right"></i>`;
+            nextBtn.className = `w-7 h-7 rounded-full flex items-center justify-center text-xs transition-all ${currentReviewPage === totalPages ? 'text-[#A3C7BD] opacity-40 cursor-not-allowed' : 'text-[#267A69] hover:bg-[#DFF5ED]'}`;
+            nextBtn.innerHTML = `<i class="fa-solid fa-chevron-right text-[10px]"></i>`;
             nextBtn.disabled = currentReviewPage === totalPages;
             nextBtn.onclick = () => {
                 if (currentReviewPage < totalPages) {
@@ -701,6 +808,80 @@
                 document.getElementById('avgRatingPercent').textContent = `${percent}% (${avg} / 5)`;
             } else {
                 document.getElementById('avgRatingPercent').textContent = `100% (5.0 / 5)`;
+            }
+        }
+
+        // --- ADMIN FUNCTIONS ---
+        function saveAdminShopInfo() {
+            const name = document.getElementById('adminShopName').value.trim();
+            const desc = document.getElementById('adminShopDesc').value.trim();
+
+            if (name) document.getElementById('shopNameDisplay').textContent = name;
+            if (desc) document.getElementById('shopDescDisplay').textContent = desc;
+
+            alert('บันทึกข้อมูลร้านค้าเรียบร้อย!');
+        }
+
+        function renderAdminRulesList() {
+            const container = document.getElementById('adminRulesList');
+            container.innerHTML = '';
+            shopRules.forEach((rule, idx) => {
+                const div = document.createElement('div');
+                div.className = "flex items-center justify-between gap-2 bg-[#F7FFFC] border border-[#D5EEE6] p-2 rounded-xl text-xs";
+                div.innerHTML = `
+                    <span class="truncate text-[#405A53]">${idx + 1}. ${rule}</span>
+                    <button onclick="removeAdminRule(${idx})" class="text-red-400 hover:text-red-600 px-1.5 py-0.5 rounded text-[10px]">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function addAdminRule() {
+            const input = document.getElementById('adminRuleInput');
+            const val = input.value.trim();
+            if (val) {
+                shopRules.push(val);
+                input.value = '';
+                renderRules();
+                renderAdminRulesList();
+            }
+        }
+
+        function removeAdminRule(idx) {
+            shopRules.splice(idx, 1);
+            renderRules();
+            renderAdminRulesList();
+        }
+
+        function renderAdminReviewsList() {
+            const container = document.getElementById('adminReviewsList');
+            container.innerHTML = '';
+            reviewsData.forEach(item => {
+                const div = document.createElement('div');
+                div.className = "flex items-center justify-between gap-2 bg-[#F7FFFC] border border-[#D5EEE6] p-2 rounded-xl text-xs";
+                div.innerHTML = `
+                    <div class="truncate">
+                        <span class="font-semibold text-[#263A36]">${item.name}</span>
+                        <span class="text-[10px] text-[#78938C] ml-1">(${item.rating}★)</span>
+                        <p class="text-[10px] text-[#78938C] truncate">${item.comment}</p>
+                    </div>
+                    <button onclick="deleteReview(${item.id})" class="text-red-400 hover:text-red-600 px-2 py-1 rounded text-xs flex-shrink-0">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function deleteReview(id) {
+            if (confirm('คุณต้องการลบรีวิวนี้ใช่หรือไม่?')) {
+                reviewsData = reviewsData.filter(r => r.id !== id);
+                updateSummaryStats();
+                renderReviews();
+                renderPagination();
+                renderAdminReviewsList();
             }
         }
 
