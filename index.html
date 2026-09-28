@@ -75,15 +75,15 @@
 
         /* Pulse Animation */
         @keyframes pulseRing {
-            0% { transform: scale(0.95); opacity: 0.8; }
-            50% { transform: scale(1.05); opacity: 0.4; }
-            100% { transform: scale(0.95); opacity: 0.8; }
+            0% { transform: scale(0.98); opacity: 0.8; }
+            50% { transform: scale(1.03); opacity: 0.4; }
+            100% { transform: scale(0.98); opacity: 0.8; }
         }
         .pulse-ring {
             animation: pulseRing 3s infinite ease-in-out;
         }
 
-        /* Circle Star Rating Custom Styles - Responsive sizing */
+        /* Circle Star Rating Custom Styles */
         .star-circle {
             width: 32px;
             height: 32px;
@@ -115,7 +115,7 @@
         }
     </style>
 </head>
-<body class="flex flex-col min-h-screen relative pb-28 pt-2 sm:pt-4">
+<body class="flex flex-col min-h-screen relative pb-28 pt-4 sm:pt-8">
 
     <!-- HIDDEN FILE INPUT FOR PROFILE UPLOAD -->
     <input type="file" id="profileFileInput" accept="image/*" class="hidden" onchange="handleProfileUpload(event)">
@@ -128,21 +128,21 @@
         <!-- ============================================================ -->
         <div id="page01" class="page-view w-full max-w-[900px] flex flex-col items-center relative my-auto">
             
-            <!-- PROFILE CIRCLE (ALWAYS CENTERED ABOVE PANEL) -->
-            <div class="relative z-20 -mb-10 sm:-mb-12 group cursor-pointer" onclick="triggerProfileUpload()" title="คลิกเพื่อเปลี่ยนรูปโปรไฟล์">
-                <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full p-1 bg-white border-2 border-[#D5EEE6] soft-mint-shadow relative flex items-center justify-center overflow-hidden">
-                    <img id="profileImgP1" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" alt="Profile" class="w-full h-full object-cover rounded-full">
+            <!-- PROFILE CIRCLE (SIZE 720PX & POSITIONED HIGH ABOVE THE MAIN CARD) -->
+            <div class="relative z-20 mb-8 sm:mb-12 group cursor-pointer w-full flex justify-center" onclick="triggerProfileUpload()" title="คลิกเพื่อเปลี่ยนรูปโปรไฟล์">
+                <div class="w-full max-w-[720px] aspect-square rounded-full p-2 sm:p-3 bg-white border-4 border-[#D5EEE6] soft-mint-shadow relative flex items-center justify-center overflow-hidden">
+                    <img id="profileImgP1" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1200" alt="Profile" class="w-full h-full object-cover rounded-full">
                     
                     <div class="absolute inset-0 bg-[#263A36]/40 rounded-full flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <i class="fa-solid fa-camera text-white text-base sm:text-xl"></i>
-                        <span class="text-white text-[9px] sm:text-[10px] mt-0.5 sm:mt-1 font-light">เปลี่ยนรูป</span>
+                        <i class="fa-solid fa-camera text-white text-3xl sm:text-5xl md:text-6xl"></i>
+                        <span class="text-white text-sm sm:text-lg md:text-xl mt-2 font-light">เปลี่ยนรูปโปรไฟล์</span>
                     </div>
                 </div>
-                <div class="absolute inset-0 -m-1 rounded-full border border-[#43B79B]/30 pulse-ring pointer-events-none"></div>
+                <div class="absolute inset-0 -m-2 sm:-m-3 rounded-full border-2 border-[#43B79B]/30 pulse-ring pointer-events-none"></div>
             </div>
 
             <!-- MAIN LOADING PANEL -->
-            <div class="w-full bg-white border border-[#D5EEE6] rounded-[28px] sm:rounded-[40px] pt-14 sm:pt-16 p-4 sm:p-8 md:p-10 soft-mint-shadow relative">
+            <div class="w-full bg-white border border-[#D5EEE6] rounded-[28px] sm:rounded-[40px] pt-8 sm:pt-12 p-4 sm:p-8 md:p-10 soft-mint-shadow relative">
                 
                 <!-- MINT CONTENT BOX -->
                 <div class="bg-[#DFF5ED] border border-[#C8E9DF] rounded-[22px] sm:rounded-[35px] p-4 sm:p-8 md:p-10 text-center mb-6 sm:mb-8">
@@ -274,7 +274,6 @@
                     </div>
                 </div>
             </div>
-
 
             <!-- REVIEW FORM CARD -->
             <div class="w-full bg-[#E8F8F2] border-2 border-[#D5EEE6] rounded-[28px] sm:rounded-[38px] p-2.5 sm:p-4 soft-mint-shadow mb-6 sm:mb-8">
@@ -479,22 +478,19 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // --- EXIT WEBSITE ACTION ---
+        // --- EXIT WEBSITE ACTION (ACTUAL DIRECT EXIT/REDIRECT) ---
         function exitWebsite() {
-            // Replacing browser confirm box with a custom state update
-            const statusElem = document.getElementById('loadingStatusText');
-            statusElem.innerHTML = `
-                <i class="fa-solid fa-circle-notch fa-spin text-[#43B79B]"></i>
-                <span>กำลังรีเซ็ตระบบ...</span>
-            `;
-            
+            // Attempt to close window directly
+            window.close();
+
+            // Fallback for security restrictions when window.close() is prevented
             setTimeout(() => {
-                statusElem.innerHTML = `
-                    <i class="fa-solid fa-circle-check text-[#43B79B]"></i>
-                    <span>ออกจากระบบเรียบร้อยแล้ว</span>
-                `;
-                goToPage('page01');
-            }, 800);
+                if (window.history.length > 1) {
+                    window.history.back();
+                } else {
+                    window.location.href = 'about:blank';
+                }
+            }, 100);
         }
 
         // --- PROFILE IMAGE UPLOAD HANDLER ---
@@ -566,7 +562,6 @@
             const review = reviewInput.value.trim();
 
             if (!name || !review) {
-                // Show inline warning instead of alert window
                 nameInput.classList.add('border-red-400');
                 reviewInput.classList.add('border-red-400');
                 setTimeout(() => {
