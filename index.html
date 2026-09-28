@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mint Profile & Review Platform</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Prompt) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            font-family: 'Prompt', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+        }
+
+        /* Custom Mint Theme Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #E8F8F2;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #43B79B;
+            border-radius: 999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #267A69;
+        }
+
+        /* Custom Theme Background Gradient */
+        body {
+            background: radial-gradient(circle at center, #F4FFFB 0%, #E5F7F0 45%, #D8F2E9 100%);
+            min-height: 100vh;
+            color: #405A53;
+        }
+
+        /* Custom Shadows */
+        .soft-mint-shadow {
+            box-shadow: 0 15px 45px rgba(67, 183, 155, 0.12);
+        }
+        .btn-mint-shadow {
+            box-shadow: 0 6px 18px rgba(67, 183, 155, 0.22);
+        }
+
+        /* Page Transition Animation */
+        .page-view {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Pulse Animation */
+        @keyframes pulseRing {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 0.4; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+        .pulse-ring {
+            animation: pulseRing 3s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen relative pb-28">
+
+    <!-- HIDDEN FILE INPUT FOR PROFILE UPLOAD -->
+    <input type="file" id="profileFileInput" accept="image/*" class="hidden" onchange="handleProfileUpload(event)">
+
+    <!-- MAIN APP CONTAINER -->
+    <main class="flex-grow flex items-center justify-center p-4 sm:p-6 md:p-8">
+
+        <!-- ============================================================ -->
+        <!-- PAGE 01 — LOADING / ENTRY PAGE                               -->
+        <!-- ============================================================ -->
+        <div id="page01" class="page-view w-full max-w-[900px] flex flex-col items-center relative my-auto">
+            
+            <!-- PROFILE CIRCLE (ALWAYS CENTERED ABOVE PANEL) -->
+            <div class="relative z-20 -mb-12 group cursor-pointer" onclick="triggerProfileUpload()" title="คลิกเพื่อเปลี่ยนรูปโปรไฟล์">
+                <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1 bg-white border-2 border-[#D5EEE6] soft-mint-shadow relative flex items-center justify-center overflow-hidden">
+                    <img id="profileImgP1" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" alt="Profile" class="w-full h-full object-cover rounded-full">
+                    
+                    <div class="absolute inset-0 bg-[#263A36]/40 rounded-full flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i class="fa-solid fa-camera text-white text-xl"></i>
+                        <span class="text-white text-[10px] mt-1 font-light">เปลี่ยนรูป</span>
+                    </div>
+                </div>
+                <div class="absolute inset-0 -m-1 rounded-full border border-[#43B79B]/30 pulse-ring pointer-events-none"></div>
+            </div>
+
+            <!-- MAIN LOADING PANEL -->
+            <div class="w-full bg-white border border-[#D5EEE6] rounded-[35px] sm:rounded-[40px] pt-16 p-6 sm:p-10 soft-mint-shadow relative">
+                
+                <!-- MINT CONTENT BOX -->
+                <div class="bg-[#DFF5ED] border border-[#C8E9DF] rounded-[28px] sm:rounded-[35px] p-6 sm:p-10 text-center mb-8">
+                    
+                    <!-- DESCRIPTION BOX -->
+                    <div class="bg-white rounded-[20px] sm:rounded-[25px] border border-[#D5EEE6] shadow-sm max-w-[650px] mx-auto p-5 sm:p-8 mb-6">
+                        <h2 id="loadingText" class="text-[#263A36] text-lg sm:text-xl md:text-2xl font-semibold leading-relaxed">
+                            กำลังเตรียมเว็บไซต์<br>กรุณารอสักครู่...
+                        </h2>
+                    </div>
+
+                    <!-- LOADING STATUS TEXT -->
+                    <p id="loadingStatusText" class="text-[#43B79B] font-medium text-sm sm:text-base mb-6 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-[#43B79B] fa-circle-notch fa-spin"></i>
+                        <span>พร้อมเข้าสู่เว็บไซต์!</span>
+                    </p>
+
+                    <!-- ON / OFF TOGGLE -->
+                    <div class="inline-flex bg-white rounded-full p-1 border border-[#D5EEE6] shadow-inner w-64 sm:w-80 h-14 items-center relative">
+                        <button id="toggleOn" onclick="setToggleStatus(true)" class="flex-1 h-full rounded-full font-semibold text-sm sm:text-base transition-all duration-300 bg-[#43B79B] text-white shadow-md">
+                            On
+                        </button>
+                        <button id="toggleOff" onclick="setToggleStatus(false)" class="flex-1 h-full rounded-full font-semibold text-sm sm:text-base transition-all duration-300 text-[#78938C]">
+                            Off
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- BOTTOM PREVIEW SECTION -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                    
+                    <!-- LEFT: PREVIEW IMAGE & SLIDER -->
+                    <div class="md:col-span-7 relative group">
+                        <div class="w-full aspect-video rounded-[20px] border border-[#D5EEE6] bg-[#F7FFFC] overflow-hidden relative soft-mint-shadow">
+                            <img id="previewImage" src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800" alt="Preview" class="w-full h-full object-cover transition-all duration-500">
+                            
+                            <div id="previewCaption" class="absolute bottom-3 left-3 bg-[#263A36]/75 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-full border border-white/20">
+                                1 / 3: ร้านบรรยากาศอบอุ่น สไตล์ Minimal Mint
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: BUTTONS -->
+                    <div class="md:col-span-5 flex flex-col gap-3.5">
+                        <button onclick="goToPage('page02')" class="w-full h-[60px] sm:h-[65px] bg-[#43B79B] hover:bg-[#39A188] active:scale-[0.98] text-white font-semibold text-base sm:text-lg rounded-full btn-mint-shadow flex items-center justify-center gap-3 transition-all">
+                            <span>เข้าสู่เว็บไซต์</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                        <button onclick="exitWebsite()" class="w-full h-[60px] sm:h-[65px] bg-white border-2 border-[#D5EEE6] hover:bg-[#E8F8F2] text-[#405A53] hover:text-[#267A69] active:scale-[0.98] font-semibold text-base sm:text-lg rounded-full flex items-center justify-center gap-3 transition-all">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            <span>ออกจากเว็บไซต์</span>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ============================================================ -->
+        <!-- PAGE 02 — HOME / PROFILE PAGE                                -->
+        <!-- ============================================================ -->
+        <div id="page02" class="page-view w-full max-w-[900px] hidden flex-col items-center">
+            
+            <!-- HEADER CONTAINER -->
+            <div class="w-full bg-white border border-[#D5EEE6] rounded-[30px] sm:rounded-[35px] soft-mint-shadow p-6 sm:p-10 text-center relative mb-16">
+                <div class="h-28 sm:h-36 bg-gradient-to-r from-[#DFF5ED] via-[#E8F8F2] to-[#D8F2E9] rounded-[20px] sm:rounded-[25px] border border-[#D5EEE6] relative">
+                    <div class="absolute inset-0 flex items-center justify-center opacity-15">
+                        <i class="fa-solid fa-leaf text-6xl text-[#43B79B]"></i>
+                    </div>
+                </div>
+
+                <!-- OVERLAPPING PROFILE CIRCLE -->
+                <div class="absolute left-1/2 -translate-x-1/2 -bottom-12 z-10 group cursor-pointer" onclick="triggerProfileUpload()" title="คลิกเพื่อเปลี่ยนรูปโปรไฟล์">
+                    <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 bg-white border-2 border-[#D5EEE6] soft-mint-shadow overflow-hidden relative">
+                        <img id="profileImgP2" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" alt="Profile" class="w-full h-full object-cover rounded-full">
+                        <div class="absolute inset-0 bg-[#263A36]/40 rounded-full flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <i class="fa-solid fa-camera text-white text-lg"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROFILE INFORMATION -->
+            <div class="text-center mb-8 px-4">
+                <h1 id="shopNameDisplay" class="text-2xl sm:text-3xl font-bold text-[#263A36] mb-2">
+                    Minty Cafe & Studio
+                </h1>
+                <p id="shopDescDisplay" class="text-[#78938C] text-sm sm:text-base max-w-md mx-auto">
+                    บริการกาแฟสด เบเกอรี่โฮมเมด และพื้นที่พักผ่อนสไตล์ซอฟต์มินต์ อบอุ่น เป็นกันเอง
+                </p>
+            </div>
+
+            <!-- CATEGORY DROPDOWN -->
+            <div class="w-full mb-8">
+                <button onclick="toggleCategoryDropdown()" class="w-full bg-white border border-[#D5EEE6] rounded-[20px] sm:rounded-[25px] p-4 sm:p-5 soft-mint-shadow flex items-center justify-between hover:bg-[#F7FFFC] transition-colors">
+                    <span class="text-[#263A36] font-medium text-base sm:text-lg flex items-center gap-3">
+                        <i class="fa-solid fa-layer-group text-[#43B79B]"></i>
+                        หมวดหมู่บริการ ( แตะเปิดดูได้ )
+                    </span>
+                    <i id="dropdownArrow" class="fa-solid fa-chevron-down text-[#78938C] transition-transform duration-300"></i>
+                </button>
+
+                <div id="categoryMenu" class="hidden mt-3 bg-white border border-[#D5EEE6] rounded-[20px] p-4 soft-mint-shadow grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <div class="bg-[#DFF5ED] p-3 rounded-xl text-center text-[#267A69] text-sm font-medium hover:bg-[#43B79B] hover:text-white cursor-pointer transition-all">
+                        ☕ เครื่องดื่มดิป
+                    </div>
+                    <div class="bg-[#DFF5ED] p-3 rounded-xl text-center text-[#267A69] text-sm font-medium hover:bg-[#43B79B] hover:text-white cursor-pointer transition-all">
+                        🍰 เบเกอรี่
+                    </div>
+                    <div class="bg-[#DFF5ED] p-3 rounded-xl text-center text-[#267A69] text-sm font-medium hover:bg-[#43B79B] hover:text-white cursor-pointer transition-all">
+                        🌿 สินค้าออร์แกนิค
+                    </div>
+                    <div class="bg-[#DFF5ED] p-3 rounded-xl text-center text-[#267A69] text-sm font-medium hover:bg-[#43B79B] hover:text-white cursor-pointer transition-all">
+                        📸 โซนถ่ายรูป
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ============================================================ -->
+            <!-- REVIEW FORM CARD (UPDATED TO MATCH IMAGE 1 FRAME STRUCTURE)  -->
+            <!-- ============================================================ -->
+            <div class="w-full bg-[#E8F8F2] border-2 border-[#D5EEE6] rounded-[38px] p-3 sm:p-4 soft-mint-shadow mb-8">
+                <!-- INNER CARD CONTAINER (DOUBLE FRAME EFFECT) -->
+                <div class="w-full bg-white border border-[#D5EEE6] rounded-[30px] p-5 sm:p-8">
+                    
+                    <!-- TOP SECTION: CALENDAR BOX (LEFT) + HEADING/BADGE (RIGHT) -->
+                    <div class="flex items-start justify-between gap-4 mb-6">
+                        
+                        <!-- LEFT: DATE BOX (STRUCTURED LIKE THE CALENDAR WIDGET IN IMAGE 1) -->
+                        <div class="bg-[#F7FFFC] border-2 border-[#D5EEE6] rounded-[22px] p-2.5 sm:p-3 text-center min-w-[90px] sm:min-w-[110px] shadow-sm">
+                            <p class="text-[#78938C] text-[11px] sm:text-xs font-semibold uppercase tracking-wider mb-1">
+                                <i class="fa-regular fa-calendar-check text-[#43B79B] mr-1"></i>Date
+                            </p>
+                            <div class="bg-[#43B79B] text-white font-bold rounded-full py-1 text-sm sm:text-base my-0.5 shadow-sm">
+                                <span id="currentDateDayDisplay">28</span>
+                            </div>
+                            <p id="currentDateMonthYearDisplay" class="text-[#267A69] text-[10px] sm:text-xs font-medium mt-1">
+                                ก.ย. 2026
+                            </p>
+                        </div>
+
+                        <!-- RIGHT: TEXT MESSAGES & DECORATIVE BADGE -->
+                        <div class="text-right flex flex-col items-end pt-1">
+                            <span class="inline-block bg-[#DFF5ED] text-[#267A69] text-[11px] sm:text-xs font-bold px-3 py-1 rounded-full border border-[#C8E9DF] mb-2">
+                                Review Form ✍️
+                            </span>
+                            <h3 class="text-[#43B79B] font-bold text-sm sm:text-base leading-tight">
+                                plus one for me
+                            </h3>
+                            <p class="text-[#78938C] text-xs font-light mt-0.5">
+                                thank you nakab
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- INPUT SECTION: CUSTOMER NAME + SUBMIT BUTTON (SAME ROW LAYOUT LIKE WRITE TASK + BUTTON) -->
+                    <div class="mb-5">
+                        <label class="block text-[#263A36] font-semibold text-sm sm:text-base mb-2 flex items-center gap-2">
+                            <span>ใส่ชื่อลูกค้า :</span>
+                        </label>
+                        <div class="flex items-center gap-2 sm:gap-3">
+                            <div class="flex-grow bg-[#F7FFFC] border-2 border-[#D5EEE6] rounded-full px-4 py-3 sm:py-3.5 focus-within:border-[#43B79B] focus-within:ring-2 focus-within:ring-[#43B79B]/20 transition-all flex items-center gap-2 shadow-inner">
+                                <input type="text" id="inputCustomerName" placeholder="กรุณาใส่ชื่อของคุณ..." class="w-full bg-transparent text-[#263A36] text-sm sm:text-base outline-none">
+                            </div>
+                            
+                            <!-- ACTION BUTTON RIGHT BESIDE NAME INPUT -->
+                            <button onclick="submitReview()" class="h-[46px] sm:h-[52px] px-5 sm:px-6 bg-[#43B79B] hover:bg-[#39A188] active:scale-[0.96] text-white font-semibold rounded-full btn-mint-shadow text-sm sm:text-base flex items-center justify-center gap-2 flex-shrink-0 transition-all">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span class="hidden sm:inline">บันทึกและส่งรีวิว</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CUSTOMER REVIEW TEXTAREA BOX (ROUNDED ITEM BLOCK STYLE) -->
+                    <div class="mb-5">
+                        <label class="block text-[#263A36] font-semibold text-sm sm:text-base mb-2">
+                            รีวิวจากลูกค้า :
+                        </label>
+                        <div class="bg-[#F7FFFC] border-2 border-[#D5EEE6] rounded-[22px] p-3.5 focus-within:border-[#43B79B] focus-within:ring-2 focus-within:ring-[#43B79B]/20 transition-all shadow-inner">
+                            <textarea id="inputCustomerReview" rows="3" placeholder="พิมพ์รีวิวและ ความประทับใจของคุณที่นี่..." class="w-full bg-transparent text-[#263A36] text-sm sm:text-base outline-none resize-none leading-relaxed"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- RATING STARS CONTAINER (CAPSULE TASK ROW STYLE) -->
+                    <div class="bg-[#F7FFFC] border-2 border-[#D5EEE6] rounded-full p-3 px-5 flex items-center justify-between flex-wrap gap-2">
+                        <span class="text-[#263A36] font-semibold text-xs sm:text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-star text-[#F2B84B]"></i>
+                            ให้คะแนนความพึงพอใจ :
+                        </span>
+                        
+                        <div class="flex items-center gap-1.5 text-xl sm:text-2xl" id="starRatingContainer">
+                            <i class="fa-solid fa-star text-[#F2B84B] cursor-pointer hover:scale-110 transition-transform" onclick="setRating(1)"></i>
+                            <i class="fa-solid fa-star text-[#F2B84B] cursor-pointer hover:scale-110 transition-transform" onclick="setRating(2)"></i>
+                            <i class="fa-solid fa-star text-[#F2B84B] cursor-pointer hover:scale-110 transition-transform" onclick="setRating(3)"></i>
+                            <i class="fa-solid fa-star text-[#F2B84B] cursor-pointer hover:scale-110 transition-transform" onclick="setRating(4)"></i>
+                            <i class="fa-solid fa-star text-[#F2B84B] cursor-pointer hover:scale-110 transition-transform" onclick="setRating(5)"></i>
+                            <span id="ratingScoreText" class="text-xs font-semibold text-[#78938C] ml-1">(5 / 5)</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- ============================================================ -->
+        <!-- PAGE 03 — REVIEW LIST PAGE                                   -->
+        <!-- ============================================================ -->
+        <div id="page03" class="page-view w-full max-w-[900px] hidden flex-col">
+            
+            <!-- TOP SUMMARY CONTAINER -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                <div class="bg-white border border-[#D5EEE6] rounded-[20px] p-5 soft-mint-shadow flex items-center justify-between">
+                    <div>
+                        <p class="text-[#78938C] text-sm font-medium">จำนวนรีวิวทั้งหมด</p>
+                        <p id="totalReviewsCount" class="text-2xl sm:text-3xl font-bold text-[#263A36] mt-1">12 รายการ</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-2xl bg-[#DFF5ED] text-[#43B79B] flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-[#43B79B] fa-comments"></i>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-[#D5EEE6] rounded-[20px] p-5 soft-mint-shadow flex items-center justify-between">
+                    <div>
+                        <p class="text-[#78938C] text-sm font-medium">คะแนนความพึงพอใจเฉลี่ย</p>
+                        <p id="avgRatingPercent" class="text-2xl sm:text-3xl font-bold text-[#263A36] mt-1">98% (4.9 / 5)</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-2xl bg-[#DFF5ED] text-[#F2B84B] flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REVIEW LIST CONTAINER -->
+            <div id="reviewListContainer" class="space-y-4 mb-8">
+                <!-- Generated by JS -->
+            </div>
+
+            <!-- PAGINATION -->
+            <div class="flex items-center justify-center gap-2 flex-wrap" id="paginationContainer">
+                <!-- Generated by JS -->
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ============================================================ -->
+    <!-- FLOATING BOTTOM NAVIGATION BAR                               -->
+    <!-- ============================================================ -->
+    <nav id="bottomNav" class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-white/90 backdrop-blur-md border border-[#D5EEE6] rounded-full p-2 soft-mint-shadow flex items-center gap-2 max-w-[92vw]">
+        <button id="navPage02" onclick="goToPage('page02')" class="px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-2 bg-[#43B79B] text-white shadow-md">
+            <i class="fa-solid fa-house"></i>
+            <span>หน้าหลัก</span>
+        </button>
+
+        <button id="navPage03" onclick="goToPage('page03')" class="px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-2 text-[#267A69] hover:bg-[#DFF5ED]">
+            <i class="fa-solid fa-star"></i>
+            <span>รีวิวทั้งหมด</span>
+        </button>
+    </nav>
+
+
+    <!-- ============================================================ -->
+    <!-- JAVASCRIPT LOGIC                                             -->
+    <!-- ============================================================ -->
+    <script>
+        // --- GLOBAL STATE ---
+        let currentPage = 'page01';
+        let currentRating = 5;
+        let isToggleOn = true;
+        let currentReviewPage = 1;
+        const reviewsPerPage = 4;
+
+        // MOCK REVIEWS DATABASE
+        let reviewsData = [
+            { id: 1, name: 'คุณสมชาย สายชิล', rating: 5, date: '28 ก.ย. 2026', comment: 'เว็บดีใช้ง่ายมากครับ บรรยากาศร้านน่ารักมาก โทนสีเขียวมินต์สบายตาที่สุด' },
+            { id: 2, name: 'คุณอารียา สุขใจ', rating: 5, date: '27 ก.ย. 2026', comment: 'ขนมอร่อยมาก บริการเป็นกันเอง ประทับใจการออกแบบเว็บไซต์ที่มินิมอลและน่ารักมากค่ะ' },
+            { id: 3, name: 'คุณกิตติศักดิ์ พัฒนา', rating: 4, date: '25 ก.ย. 2026', comment: 'ระบบใช้งานลื่นไหล สะดวก รวดเร็ว แนะนำให้ทุกคนมาลองใช้บริการครับ' },
+            { id: 4, name: 'คุณเมษา นฤมล', rating: 5, date: '24 ก.ย. 2026', comment: 'ชอบโทนสีและดีไซน์มากค่ะ ดูสะอาดและละมุนตามาก ให้ 5 ดาวไปเลย!' },
+            { id: 5, name: 'คุณณัฐพล คนขยัน', rating: 5, date: '20 ก.ย. 2026', comment: 'กาแฟรสชาติดีมาก บรรยากาศเหมาะแก่การมานั่งทำงานชิลๆ ครับ' },
+            { id: 6, name: 'คุณปรียาพร พรหม', rating: 5, date: '18 ก.ย. 2026', comment: 'รีวิวตรงปก เว็บใช้งานง่ายไม่ซับซ้อน ชอบมากๆ ค่ะ' }
+        ];
+
+        // --- INIT APP ---
+        document.addEventListener('DOMContentLoaded', () => {
+            updateDateDisplay();
+            renderReviews();
+            renderPagination();
+            updateSummaryStats();
+
+            goToPage('page01');
+        });
+
+        // --- NAVIGATION CONTROLLER ---
+        function goToPage(pageId) {
+            currentPage = pageId;
+
+            document.getElementById('page01').classList.add('hidden');
+            document.getElementById('page02').classList.add('hidden');
+            document.getElementById('page03').classList.add('hidden');
+
+            const targetPage = document.getElementById(pageId);
+            targetPage.classList.remove('hidden');
+
+            const nav02 = document.getElementById('navPage02');
+            const nav03 = document.getElementById('navPage03');
+            const bottomNav = document.getElementById('bottomNav');
+
+            if (pageId === 'page01') {
+                bottomNav.classList.add('hidden');
+            } else {
+                bottomNav.classList.remove('hidden');
+            }
+
+            if (pageId === 'page02') {
+                nav02.className = "px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-2 bg-[#43B79B] text-white shadow-md";
+                nav03.className = "px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-2 text-[#267A69] hover:bg-[#DFF5ED]";
+            } else if (pageId === 'page03') {
+                nav03.className = "px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-2 bg-[#43B79B] text-white shadow-md";
+                nav02.className = "px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-2 text-[#267A69] hover:bg-[#DFF5ED]";
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- EXIT WEBSITE ACTION ---
+        function exitWebsite() {
+            if (confirm('คุณต้องการออกจากเว็บไซต์และรีเซ็ตสถานะใช่หรือไม่?')) {
+                document.getElementById('loadingStatusText').innerHTML = `
+                    <i class="fa-solid fa-[#43B79B] fa-circle-notch fa-spin"></i>
+                    <span>กำลังรีเซ็ตระบบ...</span>
+                `;
+                
+                setTimeout(() => {
+                    document.getElementById('loadingStatusText').innerHTML = `
+                        <i class="fa-solid fa-check-circle text-[#43B79B]"></i>
+                        <span>ออกจากระบบเรียบร้อยแล้ว</span>
+                    `;
+                    goToPage('page01');
+                }, 800);
+            }
+        }
+
+        // --- PROFILE IMAGE UPLOAD HANDLER ---
+        function triggerProfileUpload() {
+            document.getElementById('profileFileInput').click();
+        }
+
+        function handleProfileUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const newImgUrl = e.target.result;
+                    document.getElementById('profileImgP1').src = newImgUrl;
+                    document.getElementById('profileImgP2').src = newImgUrl;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // --- PAGE 01 TOGGLE FUNCTION ---
+        function setToggleStatus(isOn) {
+            isToggleOn = isOn;
+            const btnOn = document.getElementById('toggleOn');
+            const btnOff = document.getElementById('toggleOff');
+            const loadingText = document.getElementById('loadingText');
+
+            if (isOn) {
+                btnOn.className = "flex-1 h-full rounded-full font-semibold text-sm sm:text-base transition-all duration-300 bg-[#43B79B] text-white shadow-md";
+                btnOff.className = "flex-1 h-full rounded-full font-semibold text-sm sm:text-base transition-all duration-300 text-[#78938C]";
+                loadingText.innerHTML = "กำลังเตรียมเว็บไซต์<br>กรุณารอสักครู่...";
+            } else {
+                btnOff.className = "flex-1 h-full rounded-full font-semibold text-sm sm:text-base transition-all duration-300 bg-[#78938C] text-white shadow-md";
+                btnOn.className = "flex-1 h-full rounded-full font-semibold text-sm sm:text-base transition-all duration-300 text-[#78938C]";
+                loadingText.innerHTML = "ระบบหยุดพักชั่วคราว<br>เลื่อนปุ่มเปิดเพื่อดำเนินการต่อ";
+            }
+        }
+
+        // --- CATEGORY DROPDOWN TOGGLE ---
+        function toggleCategoryDropdown() {
+            const menu = document.getElementById('categoryMenu');
+            const arrow = document.getElementById('dropdownArrow');
+            menu.classList.toggle('hidden');
+            arrow.classList.toggle('rotate-180');
+        }
+
+        // --- STAR RATING CONTROLLER ---
+        function setRating(rating) {
+            currentRating = rating;
+            const container = document.getElementById('starRatingContainer');
+            const stars = container.querySelectorAll('i');
+            document.getElementById('ratingScoreText').textContent = `(${rating} / 5)`;
+
+            stars.forEach((star, idx) => {
+                if (idx < rating) {
+                    star.className = "fa-solid fa-star text-[#F2B84B] cursor-pointer hover:scale-110 transition-transform";
+                } else {
+                    star.className = "fa-regular fa-star text-[#D5EEE6] cursor-pointer hover:scale-110 transition-transform";
+                }
+            });
+        }
+
+        // --- SUBMIT NEW REVIEW ---
+        function submitReview() {
+            const nameInput = document.getElementById('inputCustomerName');
+            const reviewInput = document.getElementById('inputCustomerReview');
+
+            const name = nameInput.value.trim();
+            const review = reviewInput.value.trim();
+
+            if (!name || !review) {
+                alert('กรุณากรอกชื่อและรีวิวของคุณให้ครบถ้วน');
+                return;
+            }
+
+            const today = new Date();
+            const dateStr = `${today.getDate()} ก.ย. ${today.getFullYear()}`;
+
+            const newReview = {
+                id: Date.now(),
+                name: name,
+                rating: currentRating,
+                date: dateStr,
+                comment: review
+            };
+
+            reviewsData.unshift(newReview);
+            nameInput.value = '';
+            reviewInput.value = '';
+            setRating(5);
+
+            updateSummaryStats();
+            renderReviews();
+            renderPagination();
+
+            alert('ขอบคุณสำหรับรีวิวของคุณ!');
+            goToPage('page03');
+        }
+
+        // --- RENDER REVIEWS FOR PAGE 03 ---
+        function renderReviews() {
+            const container = document.getElementById('reviewListContainer');
+            container.innerHTML = '';
+
+            const startIndex = (currentReviewPage - 1) * reviewsPerPage;
+            const endIndex = startIndex + reviewsPerPage;
+            const pageReviews = reviewsData.slice(startIndex, endIndex);
+
+            if (pageReviews.length === 0) {
+                container.innerHTML = `<div class="bg-white rounded-2xl p-8 text-center text-[#78938C]">ยังไม่มีรายการรีวิว</div>`;
+                return;
+            }
+
+            pageReviews.forEach(item => {
+                let starsHtml = '';
+                for (let i = 1; i <= 5; i++) {
+                    if (i <= item.rating) {
+                        starsHtml += `<i class="fa-solid fa-star text-[#F2B84B] text-xs sm:text-sm"></i>`;
+                    } else {
+                        starsHtml += `<i class="fa-regular fa-star text-[#D5EEE6] text-xs sm:text-sm"></i>`;
+                    }
+                }
+
+                const card = document.createElement('div');
+                card.className = "bg-white border border-[#D5EEE6] rounded-[22px] sm:rounded-[25px] p-5 sm:p-6 soft-mint-shadow transition-all hover:translate-y-[-2px]";
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-3 mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#DFF5ED] border border-[#C8E9DF] flex items-center justify-center text-[#267A69] font-bold text-base sm:text-lg flex-shrink-0">
+                                ${item.name.charAt(0) || 'C'}
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-[#263A36] text-sm sm:text-base">${item.name}</h4>
+                                <div class="flex items-center gap-1 mt-0.5">${starsHtml}</div>
+                            </div>
+                        </div>
+                        <span class="text-xs text-[#78938C] bg-[#F7FFFC] border border-[#D5EEE6] px-2.5 py-1 rounded-full flex-shrink-0">
+                            ${item.date}
+                        </span>
+                    </div>
+                    <p class="text-[#405A53] text-sm sm:text-base leading-relaxed pl-1 sm:pl-2">
+                        "${item.comment}"
+                    </p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // --- RENDER PAGINATION CONTROLS ---
+        function renderPagination() {
+            const container = document.getElementById('paginationContainer');
+            container.innerHTML = '';
+
+            const totalPages = Math.ceil(reviewsData.length / reviewsPerPage) || 1;
+
+            const prevBtn = document.createElement('button');
+            prevBtn.className = `w-10 h-10 rounded-full flex items-center justify-center border text-sm font-semibold transition-all ${currentReviewPage === 1 ? 'border-[#D5EEE6] text-[#78938C] opacity-50 cursor-not-allowed' : 'border-[#D5EEE6] text-[#267A69] hover:bg-[#DFF5ED]'}`;
+            prevBtn.innerHTML = `<i class="fa-solid fa-chevron-left"></i>`;
+            prevBtn.disabled = currentReviewPage === 1;
+            prevBtn.onclick = () => {
+                if (currentReviewPage > 1) {
+                    currentReviewPage--;
+                    renderReviews();
+                    renderPagination();
+                }
+            };
+            container.appendChild(prevBtn);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.className = `w-10 h-10 rounded-full text-sm font-semibold transition-all ${i === currentReviewPage ? 'bg-[#43B79B] text-white shadow-md' : 'bg-white text-[#267A69] border border-[#D5EEE6] hover:bg-[#DFF5ED]'}`;
+                btn.textContent = i;
+                btn.onclick = () => {
+                    currentReviewPage = i;
+                    renderReviews();
+                    renderPagination();
+                };
+                container.appendChild(btn);
+            }
+
+            const nextBtn = document.createElement('button');
+            nextBtn.className = `w-10 h-10 rounded-full flex items-center justify-center border text-sm font-semibold transition-all ${currentReviewPage === totalPages ? 'border-[#D5EEE6] text-[#78938C] opacity-50 cursor-not-allowed' : 'border-[#D5EEE6] text-[#267A69] hover:bg-[#DFF5ED]'}`;
+            nextBtn.innerHTML = `<i class="fa-solid fa-chevron-right"></i>`;
+            nextBtn.disabled = currentReviewPage === totalPages;
+            nextBtn.onclick = () => {
+                if (currentReviewPage < totalPages) {
+                    currentReviewPage++;
+                    renderReviews();
+                    renderPagination();
+                }
+            };
+            container.appendChild(nextBtn);
+        }
+
+        // --- UPDATE SUMMARY STATS ---
+        function updateSummaryStats() {
+            const count = reviewsData.length;
+            document.getElementById('totalReviewsCount').textContent = `${count} รายการ`;
+
+            if (count > 0) {
+                const totalRating = reviewsData.reduce((acc, r) => acc + r.rating, 0);
+                const avg = (totalRating / count).toFixed(1);
+                const percent = Math.round((avg / 5) * 100);
+                document.getElementById('avgRatingPercent').textContent = `${percent}% (${avg} / 5)`;
+            } else {
+                document.getElementById('avgRatingPercent').textContent = `100% (5.0 / 5)`;
+            }
+        }
+
+        // --- HELPER: DATE DISPLAY ---
+        function updateDateDisplay() {
+            const today = new Date();
+            const dayElem = document.getElementById('currentDateDayDisplay');
+            const monthYearElem = document.getElementById('currentDateMonthYearDisplay');
+            
+            if (dayElem) dayElem.textContent = today.getDate();
+            if (monthYearElem) monthYearElem.textContent = `ก.ย. ${today.getFullYear()}`;
+        }
+    </script>
+
+</body>
+</html>
