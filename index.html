@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mint Profile & Review Platform</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -17,6 +17,7 @@
         * {
             font-family: 'Prompt', sans-serif;
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
         }
 
         /* Polka Dot Background Pattern matching Ref Image 3 */
@@ -102,12 +103,12 @@
         }
     </style>
 </head>
-<body class="flex flex-col min-h-screen relative pb-28 items-center justify-center p-3 sm:p-6">
+<body class="flex flex-col min-h-screen relative pb-24 sm:pb-28 items-center justify-center p-3 sm:p-6 overflow-x-hidden">
 
     <!-- HIDDEN FILE INPUT FOR PROFILE UPLOAD -->
     <input type="file" id="profileFileInput" accept="image/*" class="hidden" onchange="handleProfileUpload(event)">
 
-    <!-- MAIN CONTAINER (จำกัดขนาดกลางหน้าจอโดยตรง) -->
+    <!-- MAIN CONTAINER (จำกัดขนาดกลางหน้าจอ ตอบสนองกับจอมือถืออย่างเต็มประสิทธิภาพ) -->
     <div class="w-full max-w-[540px] relative my-auto">
 
         <!-- ============================================================ -->
@@ -116,8 +117,8 @@
         <div id="page01" class="page-view w-full flex flex-col items-center relative">
             
             <!-- PROFILE CIRCLE (วางเกยอยู่ด้านบนของกล่อง) -->
-            <div class="relative z-20 -mb-10 group cursor-pointer" onclick="triggerProfileUpload()" title="คลิกเพื่อเปลี่ยนรูปโปรไฟล์">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full p-1 bg-white border-2 border-[#D5EEE6] soft-mint-shadow relative flex items-center justify-center overflow-hidden">
+            <div class="relative z-20 -mb-8 sm:-mb-10 group cursor-pointer" onclick="triggerProfileUpload()" title="คลิกเพื่อเปลี่ยนรูปโปรไฟล์">
+                <div class="w-18 h-18 sm:w-24 sm:h-24 rounded-full p-1 bg-white border-2 border-[#D5EEE6] soft-mint-shadow relative flex items-center justify-center overflow-hidden">
                     <img id="profileImgP1" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" alt="Profile" class="w-full h-full object-cover rounded-full">
                     
                     <div class="absolute inset-0 bg-[#263A36]/40 rounded-full flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -129,14 +130,14 @@
             </div>
 
             <!-- MAIN LOADING PANEL CONTAINER -->
-            <div class="w-full bg-white border border-[#D5EEE6] rounded-[32px] pt-12 p-4 sm:p-6 soft-mint-shadow relative">
+            <div class="w-full bg-white border border-[#D5EEE6] rounded-[28px] sm:rounded-[32px] pt-10 sm:pt-12 p-3.5 sm:p-6 soft-mint-shadow relative">
                 
                 <!-- MINT CONTENT BOX (กล่องเขียวมินต์ใหญ่) -->
-                <div class="bg-[#EAF6F2] border border-[#D5EEE6] rounded-[28px] p-4 sm:p-6 text-center mb-5">
+                <div class="bg-[#EAF6F2] border border-[#D5EEE6] rounded-[24px] sm:rounded-[28px] p-3.5 sm:p-6 text-center mb-4 sm:mb-5">
                     
                     <!-- DESCRIPTION BOX (กล่องข้อความขาว) -->
-                    <div class="bg-white rounded-[22px] border border-[#D5EEE6] shadow-sm p-6 sm:p-8 mb-4">
-                        <h2 id="loadingText" class="text-[#263A36] text-base sm:text-lg font-bold leading-relaxed">
+                    <div class="bg-white rounded-[18px] sm:rounded-[22px] border border-[#D5EEE6] shadow-sm p-4 sm:p-8 mb-4">
+                        <h2 id="loadingText" class="text-[#263A36] text-sm sm:text-lg font-bold leading-relaxed">
                             กำลังเตรียมเว็บไซต์<br>กรุณารอสักครู่...
                         </h2>
                     </div>
@@ -148,7 +149,7 @@
                     </p>
 
                     <!-- ON / OFF TOGGLE BUTTON -->
-                    <div class="inline-flex bg-white rounded-full p-1 border border-[#D5EEE6] shadow-inner w-52 sm:w-60 h-11 items-center relative">
+                    <div class="inline-flex bg-white rounded-full p-1 border border-[#D5EEE6] shadow-inner w-48 sm:w-60 h-10 sm:h-11 items-center relative">
                         <button id="toggleOn" onclick="setToggleStatus(true)" class="flex-1 h-full rounded-full font-semibold text-xs transition-all duration-300 bg-[#55BBA1] text-white shadow-sm">
                             On
                         </button>
@@ -159,26 +160,26 @@
 
                 </div>
 
-                <!-- BOTTOM SECTION (จัดสรรเป็น 2 คอลัมน์ ซ้าย-รูปพรีวิว / ขวา-ปุ่มเข้าเว็บ) -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 items-center">
+                <!-- BOTTOM SECTION (รองรับมือถือด้วย Grid 1 คอลัมน์ และขยายเป็น 2 คอลัมน์บนจอใหญ่) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5 items-center">
                     
                     <!-- PREVIEW IMAGE -->
-                    <div class="w-full h-36 sm:h-40 rounded-[20px] border border-[#D5EEE6] bg-[#F7FFFC] overflow-hidden relative soft-mint-shadow">
+                    <div class="w-full h-36 sm:h-40 rounded-[18px] sm:rounded-[20px] border border-[#D5EEE6] bg-[#F7FFFC] overflow-hidden relative soft-mint-shadow">
                         <img id="previewImage" src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800" alt="Preview" class="w-full h-full object-cover">
                         
-                        <div id="previewCaption" class="absolute bottom-2 left-2 bg-black/60 backdrop-blur-sm text-white text-[9px] sm:text-[10px] px-2.5 py-1 rounded-full border border-white/20">
+                        <div id="previewCaption" class="absolute bottom-2 left-2 bg-black/60 backdrop-blur-sm text-white text-[9px] sm:text-[10px] px-2.5 py-1 rounded-full border border-white/20 max-w-[90%] truncate">
                             1 / 3: ร้านบรรยากาศอบอุ่น สไตล์ Minimal Mint
                         </div>
                     </div>
 
                     <!-- BUTTONS CONTAINER -->
-                    <div class="w-full flex flex-col gap-2.5">
-                        <button onclick="goToPage('page02')" class="w-full h-[46px] bg-[#55BBA1] hover:bg-[#43A68D] active:scale-[0.98] text-white font-semibold text-xs sm:text-sm rounded-full btn-mint-shadow flex items-center justify-center gap-2 transition-all">
+                    <div class="w-full flex flex-col gap-2 sm:gap-2.5">
+                        <button onclick="goToPage('page02')" class="w-full h-[44px] sm:h-[46px] bg-[#55BBA1] hover:bg-[#43A68D] active:scale-[0.98] text-white font-semibold text-xs sm:text-sm rounded-full btn-mint-shadow flex items-center justify-center gap-2 transition-all">
                             <span>เข้าสู่เว็บไซต์</span>
                             <i class="fa-solid fa-arrow-right text-xs"></i>
                         </button>
 
-                        <button onclick="exitWebsite()" class="w-full h-[46px] bg-white border border-[#D5EEE6] hover:bg-[#E8F8F2] text-[#263A36] active:scale-[0.98] font-semibold text-xs sm:text-sm rounded-full flex items-center justify-center gap-2 transition-all">
+                        <button onclick="exitWebsite()" class="w-full h-[44px] sm:h-[46px] bg-white border border-[#D5EEE6] hover:bg-[#E8F8F2] text-[#263A36] active:scale-[0.98] font-semibold text-xs sm:text-sm rounded-full flex items-center justify-center gap-2 transition-all">
                             <i class="fa-solid fa-arrow-left text-xs"></i>
                             <span>ออกจากเว็บไซต์</span>
                         </button>
@@ -197,17 +198,17 @@
         <div id="page02" class="page-view w-full hidden flex-col items-center">
             
             <!-- MAIN PROFILE CONTAINER CARD -->
-            <div class="w-full bg-white border border-[#D5EEE6] rounded-[28px] soft-mint-shadow p-3.5 sm:p-5 text-center relative mb-5 overflow-hidden">
+            <div class="w-full bg-white border border-[#D5EEE6] rounded-[28px] soft-mint-shadow p-3.5 sm:p-5 text-center relative mb-4 sm:mb-5 overflow-hidden">
                 
-                <!-- COVER BANNER (ขนาดสัดส่วน 1080x580) -->
-                <div class="w-full aspect-[1080/580] rounded-[20px] overflow-hidden relative border border-[#D5EEE6] bg-[#DFF5ED]">
+                <!-- COVER BANNER (สัดส่วน 1080x580 ปรับตัวตามขนาดจอมือถืออย่างลงตัว) -->
+                <div class="w-full aspect-[1080/580] rounded-[18px] sm:rounded-[20px] overflow-hidden relative border border-[#D5EEE6] bg-[#DFF5ED]">
                     <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800" alt="Cover" class="w-full h-full object-cover">
                 </div>
 
                 <!-- OVERLAPPING PROFILE AVATAR -->
-                <div class="-mt-10 sm:-mt-12 mb-2 flex justify-center relative z-10">
+                <div class="-mt-8 sm:-mt-12 mb-2 flex justify-center relative z-10">
                     <div class="group cursor-pointer relative" onclick="triggerProfileUpload()" title="คลิกเพื่อเปลี่ยนรูปโปรไฟล์">
-                        <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full p-1 bg-white border-2 border-[#D5EEE6] soft-mint-shadow overflow-hidden relative">
+                        <div class="w-18 h-18 sm:w-24 sm:h-24 rounded-full p-1 bg-white border-2 border-[#D5EEE6] soft-mint-shadow overflow-hidden relative">
                             <img id="profileImgP2" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" alt="Profile" class="w-full h-full object-cover rounded-full">
                             <div class="absolute inset-0 bg-[#263A36]/40 rounded-full flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                                 <i class="fa-solid fa-camera text-white text-xs"></i>
@@ -220,16 +221,16 @@
                 <p class="text-[9px] sm:text-[10px] text-[#78938C] uppercase tracking-widest font-semibold mb-0.5">
                     WELCOME TO
                 </p>
-                <h1 id="shopNameDisplay" class="text-lg sm:text-xl font-bold text-[#267A69] tracking-wider mb-1">
+                <h1 id="shopNameDisplay" class="text-base sm:text-xl font-bold text-[#267A69] tracking-wider mb-1">
                     MISAESOLLY
                 </h1>
-                <p id="shopDescDisplay" class="text-[#78938C] text-xs max-w-xs mx-auto italic mb-5">
+                <p id="shopDescDisplay" class="text-[#78938C] text-xs max-w-xs mx-auto italic mb-4 sm:mb-5">
                     " บริการด้วยความใส่ใจทุกขั้นตอน "
                 </p>
 
                 <!-- CATEGORY / ACCORDION BOX -->
                 <div class="w-full text-left mb-3.5">
-                    <div class="bg-white border border-[#D5EEE6] rounded-[20px] p-3.5 soft-mint-shadow relative">
+                    <div class="bg-white border border-[#D5EEE6] rounded-[18px] sm:rounded-[20px] p-3 sm:p-3.5 soft-mint-shadow relative">
                         <button onclick="toggleCategoryDropdown()" class="w-full flex items-center justify-between text-center relative focus:outline-none">
                             <span class="w-full text-[#263A36] font-semibold text-xs tracking-wide">
                                 ข้อควรรู้ก่อนติดต่อ
@@ -237,7 +238,7 @@
                             <i id="dropdownArrow" class="fa-solid fa-chevron-down text-[#43B79B] text-[10px] transition-transform duration-300 absolute right-1"></i>
                         </button>
 
-                        <div id="categoryMenu" class="mt-3 bg-[#EEFAF5] border border-[#D5EEE6] rounded-[16px] p-3.5 text-left transition-all">
+                        <div id="categoryMenu" class="mt-3 bg-[#EEFAF5] border border-[#D5EEE6] rounded-[14px] sm:rounded-[16px] p-3 sm:p-3.5 text-left transition-all">
                             <ul id="rulesListDisplay" class="space-y-2 text-[#405A53] text-xs">
                                 <li class="flex items-start gap-2">
                                     <span class="w-1.5 h-1.5 rounded-full bg-[#43B79B] mt-1.5 flex-shrink-0"></span>
@@ -258,7 +259,7 @@
 
                 <!-- LINK ITEMS -->
                 <div class="space-y-2.5">
-                    <div class="bg-white border border-[#D5EEE6] rounded-[18px] p-3 flex items-center justify-between soft-mint-shadow hover:border-[#43B79B] transition-all cursor-pointer">
+                    <div class="bg-white border border-[#D5EEE6] rounded-[16px] sm:rounded-[18px] p-2.5 sm:p-3 flex items-center justify-between soft-mint-shadow hover:border-[#43B79B] transition-all cursor-pointer">
                         <div class="flex items-center gap-2.5">
                             <div class="w-7 h-7 rounded-full bg-[#EEFAF5] text-[#43B79B] flex items-center justify-center text-xs">
                                 <i class="fa-brands fa-line"></i>
@@ -271,7 +272,7 @@
                         <i class="fa-solid fa-chevron-right text-[10px] text-[#A3C7BD]"></i>
                     </div>
 
-                    <div class="bg-white border border-[#D5EEE6] rounded-[18px] p-3 flex items-center justify-between soft-mint-shadow hover:border-[#43B79B] transition-all cursor-pointer" onclick="goToPage('page03')">
+                    <div class="bg-white border border-[#D5EEE6] rounded-[16px] sm:rounded-[18px] p-2.5 sm:p-3 flex items-center justify-between soft-mint-shadow hover:border-[#43B79B] transition-all cursor-pointer" onclick="goToPage('page03')">
                         <div class="flex items-center gap-2.5">
                             <div class="w-7 h-7 rounded-full bg-[#EEFAF5] text-[#43B79B] flex items-center justify-center text-xs">
                                 <i class="fa-solid fa-star"></i>
@@ -289,11 +290,11 @@
 
 
             <!-- REVIEW FORM CARD -->
-            <div class="w-full bg-white border border-[#D5EEE6] rounded-[28px] p-4 sm:p-5 soft-mint-shadow mb-4">
+            <div class="w-full bg-white border border-[#D5EEE6] rounded-[24px] sm:rounded-[28px] p-3.5 sm:p-5 soft-mint-shadow mb-4">
                 
                 <!-- TOP SECTION -->
                 <div class="flex items-start justify-between gap-2 mb-4">
-                    <div class="bg-[#F7FFFC] border border-[#D5EEE6] rounded-[16px] p-2 text-center min-w-[80px] shadow-sm">
+                    <div class="bg-[#F7FFFC] border border-[#D5EEE6] rounded-[16px] p-2 text-center min-w-[75px] sm:min-w-[80px] shadow-sm">
                         <p class="text-[#78938C] text-[9px] font-semibold uppercase tracking-wider mb-0.5">
                             <i class="fa-regular fa-calendar-check text-[#43B79B] mr-0.5"></i>Date
                         </p>
@@ -346,7 +347,7 @@
                 </div>
 
                 <!-- CIRCLE STAR RATING CONTAINER -->
-                <div class="bg-[#F7FFFC] border border-[#D5EEE6] rounded-full p-2 px-3 flex items-center justify-between flex-wrap gap-1.5">
+                <div class="bg-[#F7FFFC] border border-[#D5EEE6] rounded-2xl sm:rounded-full p-2 px-3 flex items-center justify-between flex-wrap gap-2">
                     <span class="text-[#263A36] font-semibold text-[11px] flex items-center gap-1">
                         <i class="fa-solid fa-star text-[#43B79B]"></i>
                         ให้คะแนน :
@@ -368,37 +369,37 @@
 
 
         <!-- ============================================================ -->
-        <!-- PAGE 03 — REVIEW LIST PAGE (MATCHING IMAGE 2 EXACTLY)        -->
+        <!-- PAGE 03 — REVIEW LIST PAGE                                   -->
         <!-- ============================================================ -->
         <div id="page03" class="page-view w-full hidden flex-col">
             
-            <!-- STATS CONTAINER (EXACT MATCH FOR REF IMAGE 2 SIDE-BY-SIDE CARDS) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+            <!-- STATS CONTAINER (ปรับเลย์เอาต์ตามจอมือถืออัตโนมัติ) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 mb-4 sm:mb-5">
                 <!-- CARD 1: TOTAL REVIEWS -->
-                <div class="bg-white border border-[#D5EEE6] rounded-[22px] p-4 soft-mint-shadow flex items-center justify-between">
+                <div class="bg-white border border-[#D5EEE6] rounded-[20px] sm:rounded-[22px] p-3.5 sm:p-4 soft-mint-shadow flex items-center justify-between">
                     <div>
                         <p class="text-[#78938C] text-xs font-medium">จำนวนรีวิวทั้งหมด</p>
-                        <p id="totalReviewsCount" class="text-xl sm:text-2xl font-extrabold text-[#263A36] mt-1">6 รายการ</p>
+                        <p id="totalReviewsCount" class="text-lg sm:text-2xl font-extrabold text-[#263A36] mt-0.5 sm:mt-1">6 รายการ</p>
                     </div>
-                    <div class="w-10 h-10 rounded-2xl bg-[#DFF5ED] text-[#43B79B] flex items-center justify-center text-base flex-shrink-0">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-[#DFF5ED] text-[#43B79B] flex items-center justify-center text-sm sm:text-base flex-shrink-0">
                         <i class="fa-solid fa-comments"></i>
                     </div>
                 </div>
 
                 <!-- CARD 2: AVERAGE RATING -->
-                <div class="bg-white border border-[#D5EEE6] rounded-[22px] p-4 soft-mint-shadow flex items-center justify-between">
+                <div class="bg-white border border-[#D5EEE6] rounded-[20px] sm:rounded-[22px] p-3.5 sm:p-4 soft-mint-shadow flex items-center justify-between">
                     <div>
                         <p class="text-[#78938C] text-xs font-medium">คะแนนความพึงพอใจเฉลี่ย</p>
-                        <p id="avgRatingPercent" class="text-xl sm:text-2xl font-extrabold text-[#263A36] mt-1">96% (4.8 / 5)</p>
+                        <p id="avgRatingPercent" class="text-lg sm:text-2xl font-extrabold text-[#263A36] mt-0.5 sm:mt-1">96% (4.8 / 5)</p>
                     </div>
-                    <div class="w-10 h-10 rounded-2xl bg-[#DFF5ED] text-[#43B79B] flex items-center justify-center text-base flex-shrink-0">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-[#DFF5ED] text-[#43B79B] flex items-center justify-center text-sm sm:text-base flex-shrink-0">
                         <i class="fa-solid fa-star"></i>
                     </div>
                 </div>
             </div>
 
             <!-- REVIEW LIST CONTAINER -->
-            <div id="reviewListContainer" class="space-y-3 mb-5">
+            <div id="reviewListContainer" class="space-y-2.5 sm:space-y-3 mb-4 sm:mb-5">
                 <!-- Generated by JS -->
             </div>
 
@@ -413,18 +414,18 @@
         <!-- ============================================================ -->
         <!-- PAGE 04 — ADMIN PANEL PAGE                                   -->
         <!-- ============================================================ -->
-        <div id="page04" class="page-view w-full hidden flex-col space-y-4">
+        <div id="page04" class="page-view w-full hidden flex-col space-y-3.5 sm:space-y-4">
             
             <!-- ADMIN HEADER -->
-            <div class="bg-white border border-[#D5EEE6] rounded-[24px] p-4 soft-mint-shadow text-center">
-                <h2 class="text-base font-bold text-[#267A69] flex items-center justify-center gap-2">
+            <div class="bg-white border border-[#D5EEE6] rounded-[22px] sm:rounded-[24px] p-3.5 sm:p-4 soft-mint-shadow text-center">
+                <h2 class="text-sm sm:text-base font-bold text-[#267A69] flex items-center justify-center gap-2">
                     <i class="fa-solid fa-user-gear"></i>
                     <span>ระบบผู้ดูแลร้าน (Admin Panel)</span>
                 </h2>
             </div>
 
             <!-- SHOP INFO MANAGEMENT -->
-            <div class="bg-white border border-[#D5EEE6] rounded-[24px] p-4 soft-mint-shadow space-y-3">
+            <div class="bg-white border border-[#D5EEE6] rounded-[22px] sm:rounded-[24px] p-3.5 sm:p-4 soft-mint-shadow space-y-3">
                 <h3 class="text-xs font-semibold text-[#263A36] border-b border-[#EEFAF5] pb-2">
                     <i class="fa-solid fa-store mr-1 text-[#43B79B]"></i> จัดการข้อมูลร้านค้า
                 </h3>
@@ -445,7 +446,7 @@
             </div>
 
             <!-- RULES / ANNOUNCEMENT MANAGEMENT -->
-            <div class="bg-white border border-[#D5EEE6] rounded-[24px] p-4 soft-mint-shadow space-y-3">
+            <div class="bg-white border border-[#D5EEE6] rounded-[22px] sm:rounded-[24px] p-3.5 sm:p-4 soft-mint-shadow space-y-3">
                 <h3 class="text-xs font-semibold text-[#263A36] border-b border-[#EEFAF5] pb-2">
                     <i class="fa-solid fa-list-check mr-1 text-[#43B79B]"></i> จัดการ "ข้อควรรู้ก่อนติดต่อ"
                 </h3>
@@ -463,7 +464,7 @@
             </div>
 
             <!-- REVIEWS MANAGEMENT -->
-            <div class="bg-white border border-[#D5EEE6] rounded-[24px] p-4 soft-mint-shadow space-y-3">
+            <div class="bg-white border border-[#D5EEE6] rounded-[22px] sm:rounded-[24px] p-3.5 sm:p-4 soft-mint-shadow space-y-3">
                 <h3 class="text-xs font-semibold text-[#263A36] border-b border-[#EEFAF5] pb-2">
                     <i class="fa-solid fa-comments mr-1 text-[#43B79B]"></i> จัดการรายการรีวิว
                 </h3>
@@ -479,20 +480,20 @@
 
 
     <!-- ============================================================ -->
-    <!-- FLOATING BOTTOM NAVIGATION BAR                               -->
+    <!-- FLOATING BOTTOM NAVIGATION BAR (ปรับให้เหมาะกับการแตะบนมือถือ) -->
     <!-- ============================================================ -->
-    <nav id="bottomNav" class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-white/95 backdrop-blur-md border border-[#D5EEE6] rounded-full p-1.5 soft-mint-shadow flex items-center gap-1 max-w-[95vw]">
-        <button id="navPage02" onclick="goToPage('page02')" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 bg-[#43B79B] text-white shadow-md">
+    <nav id="bottomNav" class="fixed bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-50 bg-white/95 backdrop-blur-md border border-[#D5EEE6] rounded-full p-1.5 soft-mint-shadow flex items-center gap-1 max-w-[92vw]">
+        <button id="navPage02" onclick="goToPage('page02')" class="px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-300 flex items-center gap-1 sm:gap-1.5 bg-[#43B79B] text-white shadow-md">
             <i class="fa-solid fa-house text-[10px]"></i>
             <span>หน้าหลัก</span>
         </button>
 
-        <button id="navPage03" onclick="goToPage('page03')" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 text-[#267A69] hover:bg-[#DFF5ED]">
+        <button id="navPage03" onclick="goToPage('page03')" class="px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-300 flex items-center gap-1 sm:gap-1.5 text-[#267A69] hover:bg-[#DFF5ED]">
             <i class="fa-solid fa-star text-[10px]"></i>
             <span>รีวิวทั้งหมด</span>
         </button>
 
-        <button id="navPage04" onclick="goToPage('page04')" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 text-[#267A69] hover:bg-[#DFF5ED]">
+        <button id="navPage04" onclick="goToPage('page04')" class="px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-300 flex items-center gap-1 sm:gap-1.5 text-[#267A69] hover:bg-[#DFF5ED]">
             <i class="fa-solid fa-user-gear text-[10px]"></i>
             <span>ผู้ดูแลระบบ</span>
         </button>
@@ -564,16 +565,16 @@
             }
 
             // Reset classes
-            nav02.className = "px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 text-[#267A69] hover:bg-[#DFF5ED]";
-            nav03.className = "px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 text-[#267A69] hover:bg-[#DFF5ED]";
-            nav04.className = "px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 text-[#267A69] hover:bg-[#DFF5ED]";
+            nav02.className = "px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-300 flex items-center gap-1 sm:gap-1.5 text-[#267A69] hover:bg-[#DFF5ED]";
+            nav03.className = "px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-300 flex items-center gap-1 sm:gap-1.5 text-[#267A69] hover:bg-[#DFF5ED]";
+            nav04.className = "px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-300 flex items-center gap-1 sm:gap-1.5 text-[#267A69] hover:bg-[#DFF5ED]";
 
             if (pageId === 'page02') {
-                nav02.className = "px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 bg-[#43B79B] text-white shadow-md";
+                nav02.className = "px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-300 flex items-center gap-1 sm:gap-1.5 bg-[#43B79B] text-white shadow-md";
             } else if (pageId === 'page03') {
-                nav03.className = "px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 bg-[#43B79B] text-white shadow-md";
+                nav03.className = "px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-300 flex items-center gap-1 sm:gap-1.5 bg-[#43B79B] text-white shadow-md";
             } else if (pageId === 'page04') {
-                nav04.className = "px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 bg-[#43B79B] text-white shadow-md";
+                nav04.className = "px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-300 flex items-center gap-1 sm:gap-1.5 bg-[#43B79B] text-white shadow-md";
             }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -725,11 +726,11 @@
                 }
 
                 const card = document.createElement('div');
-                card.className = "bg-white border border-[#D5EEE6] rounded-[20px] p-3.5 soft-mint-shadow transition-all hover:translate-y-[-1px]";
+                card.className = "bg-white border border-[#D5EEE6] rounded-[18px] sm:rounded-[20px] p-3 sm:p-3.5 soft-mint-shadow transition-all hover:translate-y-[-1px]";
                 card.innerHTML = `
                     <div class="flex items-center justify-between gap-2 mb-1.5">
                         <div class="flex items-center gap-2">
-                            <div class="w-7 h-7 rounded-full bg-[#EEFAF5] border border-[#D5EEE6] flex items-center justify-center text-[#267A69] font-bold text-[11px] flex-shrink-0">
+                            <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#EEFAF5] border border-[#D5EEE6] flex items-center justify-center text-[#267A69] font-bold text-[10px] sm:text-[11px] flex-shrink-0">
                                 ${item.name.charAt(0) || 'C'}
                             </div>
                             <div>
