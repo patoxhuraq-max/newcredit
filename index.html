@@ -224,12 +224,12 @@
                 <h1 id="shopNameDisplay" class="text-base sm:text-xl font-bold text-[#267A69] tracking-wider mb-1">
                     MISAESOLLY
                 </h1>
-                <p id="shopDescDisplay" class="text-[#78938C] text-xs max-w-xs mx-auto italic mb-4 sm:mb-5">
+                <p id="shopDescDisplay" class="text-[#78938C] text-xs max-w-xs mx-auto italic mb-3">
                     " บริการด้วยความใส่ใจทุกขั้นตอน "
                 </p>
 
                 <!-- CATEGORY / ACCORDION BOX -->
-                <div class="w-full text-left mb-3.5">
+                <div class="w-full text-left">
                     <div class="bg-white border border-[#D5EEE6] rounded-[18px] sm:rounded-[20px] p-3 sm:p-3.5 soft-mint-shadow relative">
                         <button onclick="toggleCategoryDropdown()" class="w-full flex items-center justify-between text-center relative focus:outline-none">
                             <span class="w-full text-[#263A36] font-semibold text-xs tracking-wide">
@@ -254,35 +254,6 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                </div>
-
-                <!-- LINK ITEMS -->
-                <div class="space-y-2.5">
-                    <div class="bg-white border border-[#D5EEE6] rounded-[16px] sm:rounded-[18px] p-2.5 sm:p-3 flex items-center justify-between soft-mint-shadow hover:border-[#43B79B] transition-all cursor-pointer">
-                        <div class="flex items-center gap-2.5">
-                            <div class="w-7 h-7 rounded-full bg-[#EEFAF5] text-[#43B79B] flex items-center justify-center text-xs">
-                                <i class="fa-brands fa-line"></i>
-                            </div>
-                            <div class="text-left">
-                                <p class="text-xs font-semibold text-[#263A36]">LINE Official Account</p>
-                                <p class="text-[10px] text-[#78938C]">@089cenvd</p>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-chevron-right text-[10px] text-[#A3C7BD]"></i>
-                    </div>
-
-                    <div class="bg-white border border-[#D5EEE6] rounded-[16px] sm:rounded-[18px] p-2.5 sm:p-3 flex items-center justify-between soft-mint-shadow hover:border-[#43B79B] transition-all cursor-pointer" onclick="goToPage('page03')">
-                        <div class="flex items-center gap-2.5">
-                            <div class="w-7 h-7 rounded-full bg-[#EEFAF5] text-[#43B79B] flex items-center justify-center text-xs">
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <div class="text-left">
-                                <p class="text-xs font-semibold text-[#263A36]">Check Credit</p>
-                                <p class="text-[10px] text-[#78938C]">Credit & Reviews</p>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-chevron-right text-[10px] text-[#A3C7BD]"></i>
                     </div>
                 </div>
 
@@ -369,14 +340,14 @@
 
 
         <!-- ============================================================ -->
-        <!-- PAGE 03 — REVIEW LIST PAGE (มีกรอบยาวสีขาวครอบตามภาพ 7)      -->
+        <!-- PAGE 03 — REVIEW LIST PAGE                                   -->
         <!-- ============================================================ -->
         <div id="page03" class="page-view w-full hidden flex-col">
             
-            <!-- MAIN PAGE WRAPPER CARD (กรอบยาวสีขาวครอบเนียนทั้งหน้าตามภาพแรก) -->
+            <!-- MAIN PAGE WRAPPER CARD -->
             <div class="w-full bg-white border border-[#D5EEE6] rounded-[28px] sm:rounded-[32px] p-4 sm:p-6 soft-mint-shadow relative">
                 
-                <!-- HEADER SUBTITLE (เอาส่วนปุ่มหลักฐานการซื้อ-ขายออกแล้ว) -->
+                <!-- HEADER SUBTITLE -->
                 <div class="flex items-center justify-between mb-3 px-1">
                     <div>
                         <span class="text-[10px] text-[#A3C7BD] font-semibold italic block">Kind words</span>
@@ -386,7 +357,7 @@
                     </div>
                 </div>
 
-                <!-- STATS CONTAINER BLOCK (สถิติการ์ดรวมแบ่งครึ่ง) -->
+                <!-- STATS CONTAINER BLOCK (ใส่ % สัดส่วนแบบ 100% / 5.0 ตามภาพ 11) -->
                 <div class="bg-white border border-[#D5EEE6] rounded-[22px] p-3.5 sm:p-4 soft-mint-shadow flex items-center justify-between mb-4 relative overflow-hidden">
                     <!-- ฝั่งซ้าย: จำนวนรีวิวทั้งหมด -->
                     <div class="flex-1 text-center border-r border-[#EEFAF5] pr-2">
@@ -394,9 +365,9 @@
                         <p class="text-[#A3C7BD] text-[10px] font-medium mt-0.5">รีวิวทั้งหมด</p>
                     </div>
 
-                    <!-- ฝั่งขวา: คะแนนร้าน -->
+                    <!-- ฝั่งขวา: คะแนนร้าน + เปอร์เซ็นต์ -->
                     <div class="flex-1 text-center pl-2">
-                        <p id="avgRatingPercent" class="text-xl sm:text-2xl font-black text-[#263A36]">5.0</p>
+                        <p id="avgRatingPercent" class="text-xl sm:text-2xl font-black text-[#263A36]">100% (5.0)</p>
                         <p class="text-[#A3C7BD] text-[10px] font-medium mt-0.5 flex items-center justify-center gap-1">
                             <i class="fa-solid fa-star text-[#FFCA28] text-[9px]"></i>
                             <span>คะแนนร้าน</span>
@@ -409,7 +380,7 @@
                     <!-- Generated by JS -->
                 </div>
 
-                <!-- PAGINATION (ปรับสไตล์ตัวเลขเหมือนภาพสลับหน้าภาพแรก) -->
+                <!-- PAGINATION -->
                 <div class="flex items-center justify-center gap-2 pt-1" id="paginationContainer">
                     <!-- Generated by JS -->
                 </div>
@@ -501,7 +472,8 @@
             <span>รีวิวทั้งหมด</span>
         </button>
 
-        <button id="navPage04" onclick="goToPage('page04')" class="px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-300 flex items-center gap-1 sm:gap-1.5 text-[#267A69] hover:bg-[#DFF5ED]">
+        <!-- กดปุ่มผู้ดูแลระบบจะเรียกฟังก์ชันยืนยันรหัสผ่านก่อน -->
+        <button id="navPage04" onclick="accessAdminPanel()" class="px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-300 flex items-center gap-1 sm:gap-1.5 text-[#267A69] hover:bg-[#DFF5ED]">
             <i class="fa-solid fa-user-gear text-[10px]"></i>
             <span>ผู้ดูแลระบบ</span>
         </button>
@@ -518,6 +490,7 @@
         let isToggleOn = true;
         let currentReviewPage = 1;
         const reviewsPerPage = 15;
+        const ADMIN_PASSWORD = "1234"; // รหัสผ่านผู้ดูแลระบบ (สามารถเปลี่ยนได้)
 
         // DYNAMIC STORE RULES
         let shopRules = [
@@ -548,6 +521,17 @@
 
             goToPage('page01');
         });
+
+        // --- ADMIN PASSWORD CHECK ---
+        function accessAdminPanel() {
+            const inputPwd = prompt("กรุณากรอกรหัสผ่านผู้ดูแลระบบ:");
+            if (inputPwd === null) return; // กด Cancel
+            if (inputPwd === ADMIN_PASSWORD) {
+                goToPage('page04');
+            } else {
+                alert("รหัสผ่านไม่ถูกต้อง! ไม่สามารถเข้าสู่หน้าผู้ดูแลระบบได้");
+            }
+        }
 
         // --- NAVIGATION CONTROLLER ---
         function goToPage(pageId) {
@@ -709,7 +693,7 @@
             goToPage('page03');
         }
 
-        // --- RENDER REVIEWS FOR PAGE 03 ---
+        // --- RENDER REVIEWS FOR PAGE 03 (ขยายวงกลมโปรไฟล์ ย้ายดาวและวันที่ไปฝั่งขวาทวนเข็มตามภาพ 12) ---
         function renderReviews() {
             const container = document.getElementById('reviewListContainer');
             container.innerHTML = '';
@@ -727,9 +711,9 @@
                 let starsHtml = '';
                 for (let i = 1; i <= 5; i++) {
                     if (i <= item.rating) {
-                        starsHtml += `<i class="fa-solid fa-star text-[#FFCA28] text-[10px]"></i>`;
+                        starsHtml += `<i class="fa-solid fa-star text-[#FFCA28] text-[11px]"></i>`;
                     } else {
-                        starsHtml += `<i class="fa-solid fa-star text-[#E5F5F0] text-[10px]"></i>`;
+                        starsHtml += `<i class="fa-solid fa-star text-[#E5F5F0] text-[11px]"></i>`;
                     }
                 }
 
@@ -740,25 +724,30 @@
                         ”
                     </div>
 
-                    <div class="flex items-start gap-2.5 mb-1 relative z-10">
-                        <div class="w-7 h-7 rounded-full bg-[#EEFAF5] border border-[#D5EEE6] flex items-center justify-center text-[#43B79B] font-semibold text-xs flex-shrink-0">
-                            ${item.name.charAt(0) || 'C'}
-                        </div>
-                        <div class="flex-grow min-w-0">
-                            <div class="flex items-center justify-between gap-1">
-                                <h4 class="font-bold text-[#263A36] text-xs truncate">${item.name}</h4>
+                    <div class="flex items-start justify-between gap-2 mb-1.5 relative z-10">
+                        <!-- ฝั่งซ้าย: ขยายขนาดวงกลมโปรไฟล์ใหญ่ขึ้น และชื่อลูกค้า -->
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-[#EEFAF5] border-2 border-[#D5EEE6] flex items-center justify-center text-[#43B79B] font-bold text-sm flex-shrink-0 shadow-sm">
+                                ${item.name.charAt(0) || 'C'}
                             </div>
-                            <span class="text-[9px] text-[#A3C7BD] block">
+                            <div>
+                                <h4 class="font-bold text-[#263A36] text-xs sm:text-sm">${item.name}</h4>
+                            </div>
+                        </div>
+
+                        <!-- ฝั่งขวา (ในกรอบแดงเดิม): วางวันที่ และดาวคะแนน -->
+                        <div class="text-right flex flex-col items-end pr-3">
+                            <span class="text-[9px] text-[#A3C7BD] font-medium block mb-0.5">
                                 ${item.date}
                             </span>
+                            <div class="flex items-center gap-0.5">
+                                ${starsHtml}
+                            </div>
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-0.5 my-1 pl-0.5">
-                        ${starsHtml}
-                    </div>
-
-                    <p class="text-[#405A53] text-xs leading-relaxed pl-0.5 mt-1">
+                    <!-- ข้อความรีวิว -->
+                    <p class="text-[#405A53] text-xs leading-relaxed pl-1 mt-2">
                         ${item.comment}
                     </p>
                 `;
@@ -766,14 +755,13 @@
             });
         }
 
-        // --- RENDER PAGINATION CONTROLS (ปรับสไตล์เป๊ะตามภาพที่ 9) ---
+        // --- RENDER PAGINATION CONTROLS ---
         function renderPagination() {
             const container = document.getElementById('paginationContainer');
             container.innerHTML = '';
 
             const totalPages = Math.ceil(reviewsData.length / reviewsPerPage) || 1;
 
-            // ปุ่มย้อนกลับ <
             const prevBtn = document.createElement('button');
             prevBtn.className = `p-2 transition-all ${currentReviewPage === 1 ? 'text-[#A3C7BD] opacity-30 cursor-not-allowed' : 'text-[#A3C7BD] hover:text-[#55BBA1]'}`;
             prevBtn.innerHTML = `<i class="fa-solid fa-chevron-left text-sm"></i>`;
@@ -787,7 +775,6 @@
             };
             container.appendChild(prevBtn);
 
-            // ปุ่มวงกลมตัวเลข
             for (let i = 1; i <= totalPages; i++) {
                 const btn = document.createElement('button');
                 if (i === currentReviewPage) {
@@ -804,9 +791,8 @@
                 container.appendChild(btn);
             }
 
-            // ปุ่มถัดไป >
             const nextBtn = document.createElement('button');
-            nextBtn.className = `p-2 transition-all ${currentReviewPage === totalPages ? 'text-[#A3C7BD] opacity-30 cursor-not-allowed' : 'text-[#A3C7BD] hover:text-[#55BBA1]'}`;
+            nextBtn.className = `p-2 transition-all ${currentReviewPage === totalPages ? 'text-[#A3C7BD] opacity-30 cursor-not-allowed' : 'text-[#267A69] hover:text-[#55BBA1]'}`;
             nextBtn.innerHTML = `<i class="fa-solid fa-chevron-right text-sm"></i>`;
             nextBtn.disabled = currentReviewPage === totalPages;
             nextBtn.onclick = () => {
@@ -819,7 +805,7 @@
             container.appendChild(nextBtn);
         }
 
-        // --- UPDATE SUMMARY STATS ---
+        // --- UPDATE SUMMARY STATS (คำนวณ % และแสดงผลสถิติ) ---
         function updateSummaryStats() {
             const count = reviewsData.length;
             document.getElementById('totalReviewsCount').textContent = `${count}`;
@@ -827,9 +813,10 @@
             if (count > 0) {
                 const totalRating = reviewsData.reduce((acc, r) => acc + r.rating, 0);
                 const avg = (totalRating / count).toFixed(1);
-                document.getElementById('avgRatingPercent').textContent = `${avg}`;
+                const percent = Math.round((avg / 5) * 100);
+                document.getElementById('avgRatingPercent').textContent = `${percent}% (${avg})`;
             } else {
-                document.getElementById('avgRatingPercent').textContent = `5.0`;
+                document.getElementById('avgRatingPercent').textContent = `0% (0.0)`;
             }
         }
 
